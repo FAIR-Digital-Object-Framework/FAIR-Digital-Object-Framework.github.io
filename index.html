@@ -269,7 +269,11 @@
 	
 	 <p>As depicted on Figure 1, the IR presents the information listed above using specific predicates to relate the identifier of the object to the identifiers of its type, its metadata record(s) and its location(s). Moreover, the FDOF-IR <strong>MUST</strong> be presented as RDF, preferably turtle or JSON-LD. This requirement allows not only a predictability of the identifier resolution behaviour but also of the serialisation format of the FDOF-IR, facilitating the implementation of client applications. These client applications would expect to retrieve a FDOF-IR as result of the identifier resolution and can be coded to parse and interpret RDF documents.</p>
 	
-	<img src="diagrams/FDOF-IR.png" width="956" height="501" alt="FDOF-IR"/>
+	<figure>
+		<p><img src="diagrams/FDOF-IR.png" alt="FDOF-IR"/></p>
+    <figcaption><span class="marker">Figure 1</span> The FDOF identifier resolution
+  </figure>
+	
 <!--
 	<p>The FAIR Digital Object Framework defines a predictable identifier resolution behavior, having the identifier resolved into a small piece of information, named the Identifier Record, containing minimally the object’s type, the reference(s) to the object’s location(s) and the reference(s) to its metadata record(s).</p>
   
