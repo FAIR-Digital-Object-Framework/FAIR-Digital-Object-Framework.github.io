@@ -271,8 +271,16 @@
 	
 	<figure>
 		<p><img src="diagrams/FDOF-IR.png" alt="FDOF-IR"/></p>
-    <figcaption><span class="marker">Figure 1</span> The FDOF identifier resolution
-  </figure>
+		<figcaption><span class="marker">Figure 1</span> The FDOF identifier resolution</figcaption>
+	</figure>
+		
+	<p>The following code excerpt is an example of the FDOF-IR in RDF turtle serialisation:</p>
+	<code>
+		&lt;fdoIdentifier&gt; fdof-o:hasType &lt;FDOType&gt<br>
+		&nbsp;fdof-o:hasMetadata &lt;metadataIdentifier&gt;<br>
+		&nbsp;fdof-o:hasObjectLocation &lt;ObjectLocation&gt; .<br>
+		&nbsp;...
+	</code>
 	
 <!--
 	<p>The FAIR Digital Object Framework defines a predictable identifier resolution behavior, having the identifier resolved into a small piece of information, named the Identifier Record, containing minimally the object’s type, the reference(s) to the object’s location(s) and the reference(s) to its metadata record(s).</p>
