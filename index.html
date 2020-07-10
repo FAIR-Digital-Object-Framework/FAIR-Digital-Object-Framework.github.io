@@ -210,7 +210,7 @@
 	
 	<p>The evolution of the informatics infrastructure  happens in incremental and complementary steps. After the emergence of the computers we felt the need to interconnect them in computer networks. From this, a natural need emerged to integrate different computer networks, which was achieved on a global scale by the Internet through its Internet Protocol (IP) and TCP/UDP protocols. The Internet allows the transportation of digital packets/datagrams from a source  to a destination host across different networks. A given content to be transmitted is broken down in a number of parts named packets. A header is added to each packet containing information necessary to deliver the packet from the source host to its destination. Once all the packets reach the destination, their content is reassembled. Therefore, the Internet does not deal with content besides transporting it through different networks.</p>
 	
-	<p>Once the problem of transporting digital content across different networks has been solved by the Internet, the next challenge in interoperability became the interlinking of Internet resources. The World Wide Web solves this problem by defining another protocol named the <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HyperText Transfer Protocol</a> (HTTP), which provides a mechanism to interrelate resources through hyperlinks. HTTP provides methods to retrieve, create, add, edit and delete Web resources. Web resources are differentiated, with respect to the WWW infrastructure, only by their serialisation formats (MIME types), e.g., an HTML page, an XML file, a JPG/GIF/PNG image, a MP4 video, etc. The actual nature of the resources, i.e., if they represent a given scientific observation, the results of a match or a person, and of the relations between resources are not considered by the Web infrastructure.</p>
+ <p>Once the problem of transporting digital content across different networks has been solved by the Internet, the next challenge in interoperability became the interlinking of Internet resources. The World Wide Web solves this problem by defining another protocol named the <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HyperText Transfer Protocol</a> (HTTP), which provides a mechanism to interrelate resources through hyperlinks. HTTP provides methods to retrieve, create, add, edit and delete Web resources. Web resources are differentiated, with respect to the WWW infrastructure, only by their serialisation formats (MIME types), e.g., an HTML page, an XML file, a JPG/GIF/PNG image, a MP4 video, etc. The actual nature of the resources, i.e., if they represent a given scientific observation, the results of a match or a person, and of the relations between resources are not considered by the Web infrastructure.</p>
 	
 	<p>For the work with data and metadata, these aforementioned infrastructures still pose challenges, especially if we add the requirements of the FAIR principles. The first principle (F1) states that metadata and data should be identified by globally unique and persistent identifiers. Related to this, the FAIR principle A1 requires that metadata and data are retrievable by their identifier using a standardized communications protocol. This means that from the identifiers we should be able to resolve them to something related to the identified entity. Some identifiers are an arbitrary sequence of characters (e.g., <a href="https://www.doi.org" target="_blank">DOI</a>) while others are already presented in a resolvable format (<a href="https://tools.ietf.org/html/rfc3986">URI</a>). With identifiers from the former case, unless the type of identifier and how to create a resolvable link from the identifier is previously known, it is not straightforward to resolve them. Moreover, once we manage to get the resolvable link and try to resolve it, another challenge is what to expect when the identifier is resolved. Currently we are lacking a commonly agreed and predictable resolution behavior, which is an obstacle for artificial agents since, in some occasions, an identifier resolves to its target object, some other times to its metadata and other times to a human-readable HTML landing page.</p>
 	
@@ -243,15 +243,34 @@
 	
 	<p>After the publication of the report, the concept of FDO has been constantly worked and refined in a number of <a href="https://www.rd-alliance.org">RDA</a> Interest and Working groups, in particular by the Group of European Data Experts (GEDE).</p>
 	
-	<p>TO DO: Describe the history of FDOF</p>
-	
+ <p role="note">TO DO: Describe the history of FDOF</p>
 	
 		
 	
 <h2 id="fdomodel">
 <span class="secno">3 </span>The FAIR Digital Object model</h2>
 	
-	<!--
+ <p role="note">TO DO: Describe the FDO model</p>
+	
+<h2 id="resbehaviour">
+<span class="secno">3 </span>Identifier resolution behaviour</h2>
+	
+	<p>In the context of machine-actionability, it is expected that identifiers of digital assets behave in a predictable way so that the artificial agents can know what to expect when an identifier is resolved. Currently, that is not always the case. Current identification systems (Handle system, URIs, etc.) rely on the user's discipline and best practices. For instance, on the Web, someone could use an URI to identify a particular PDF file but the URI may not resolve to anything or it may resolve to something else than the identified object, for instance an HTML page. Similarly, some DOIs resolve to the actual identified object, some to its metadata and many to a landing page. For artificial agents, landing pages are particularly challenging because it is not always (if ever) clear which of the potentially many links present in the page corresponds to the object identified by the DOI.</p>
+	
+	<p>To tackle this issue, the FDOF defines a predictable resolution behaviour. This behaviour is borrowed from the approach used by the Digital Object in which the identifier resolves to an artefact containing relevant information about the object. In FDOF, this artefact is named FDOF's Identifier Record (IR) and contains:</p>
+	
+	<ul>
+		<li>A reference to the object's type;</li>
+		<li>Reference(s) to the object's metadata record(s); and</li>
+		<li>Reference(s) to the object's location(s).</li>
+	</ul>
+	
+	<p>Strictly speaking, the IR is, of course, a type of metadata. In FDOF we opted to differentiate the three pieces of metadata information contained in the IR from other types of metadata information (e.g., provenance, keys, serialization format, size, etc.). The reason behind this differentiation is to separate the minimal information required by the infrastructure to the additional information that can be used by applications, agreed upon by communities, etc. In this way, we can guarantee that any FDOF-enabled applications is able to have the option to identify the type of the object (through the object type reference), directly operate on the object (through the object's location reference) or get more information about the object (through the metadata reference). Other information about the object <strong>SHOULD</strong> be placed in the metadata record(s).</p>
+	
+	 <p>As depicted on Figure 1, the IR presents the information listed above using specific predicates to relate the identifier of the object to the identifiers of its type, its metadata record(s) and its location(s). Moreover, the FDOF-IR <strong>MUST</strong> be presented as RDF, preferably turtle or JSON-LD. This requirement allows not only a predictability of the identifier resolution behaviour but also of the serialisation format of the FDOF-IR, facilitating the implementation of client applications. These client applications would expect to retrieve a FDOF-IR as result of the identifier resolution and can be coded to parse and interpret RDF documents.</p>
+	
+	<img src="diagrams/FDOF-IR.png" width="956" height="501" alt="FDOF-IR"/>
+<!--
 	<p>The FAIR Digital Object Framework defines a predictable identifier resolution behavior, having the identifier resolved into a small piece of information, named the Identifier Record, containing minimally the object’s type, the reference(s) to the object’s location(s) and the reference(s) to its metadata record(s).</p>
   
 	<p>The <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a> provide a vision of a global ecosystem of dynamically interoperable digital objects such as data, services and computing capacity. This vision entails the requirement to provide machines with  enough actionable information about each of these types of objects so they can automate as much as possible their integration and interoperation. However, to fully realise this vision, we need an infrastructure capable of supporting the interoperation of digital objects according to the requirements defined by the <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a>.</p>
