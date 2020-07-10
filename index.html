@@ -38,7 +38,7 @@
      <dd><a href="https://github.com/w3c/tr-design/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a-->
      <dt class="editor">Editor:
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:l.o.bonino@utwente.nl">Luiz Olavo Bonino</a> (<span class="p-org org">University of Twente</span>)
+     <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:l.o.bonino@utwente.nl">Luiz Olavo Bonino da Silva Santos</a> (<span class="p-org org">University of Twente</span>)
     </dl>
    </div>
    <div></div>
@@ -46,14 +46,16 @@
   </div>
   <h2 id="abstract">Abstract</h2>
   <div>
-	  <p>This is the placeholder for the documentation of the FAIR Digital Object Framework.</p>
+	  <p>The FAIR Digital Object Framework (FDOF) defines a model to represent objects in a digital environment. This document discusses the motivations for the framework and describes its elements and the interactions between them.</p>
   </div>
   <h2 id="status">Status of this document</h2>
   <div>
-   <p>Work in progress - It is expected that by mid-April 2020 more content will be available.</p>
+   <p>This document is the first draft of the FDOF documentation and serves as the basis for the further development and refinement of the framework.</p>
    <p></p>
   </div>
-<!--nav id="toc">
+
+	 <!--
+<nav id="toc">
   <h2>Table of Contents</h2>
   <ol class="toc" role="directory">
     <li><a href="#intro"><span class="secno">1</span>
@@ -175,7 +177,7 @@
              <li><a href="#justify-algos"><span class="secno">7.4.5</span>
                Possible Algorithms</a>
            </ol>
-       </ol>
+      </ol>
     <li>
      <a href="#index"><span class="secno">A</span>
        Index</a>
@@ -198,16 +200,63 @@
       Property Index</a>
   </ol>
 </nav>
+
+-->
 <main>
 <h2 id="intro">
 <span class="secno">1 </span> Introduction</h2>
   
-  <p>This document shows off some of our specification styling,
-  and describes some of the features of the style sheet.
+	<p>The <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a> provide a vision of a global ecosystem of dynamically interoperable digital objects such as data, services and computing capacity. This vision entails the requirement to provide machines with  enough actionable information about each of these types of objects so they can automate as much as possible their integration and interoperation. However, to fully realise this vision, we need an infrastructure capable of supporting the interoperation of digital objects according to the requirements defined by the <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a>.</p>
+	
+	<p>The evolution of the informatics infrastructure  happens in incremental and complementary steps. After the emergence of the computers we felt the need to interconnect them in computer networks. From this, a natural need emerged to integrate different computer networks, which was achieved on a global scale by the Internet through its Internet Protocol (IP) and TCP/UDP protocols. The Internet allows the transportation of digital packets/datagrams from a source  to a destination host across different networks. A given content to be transmitted is broken down in a number of parts named packets. A header is added to each packet containing information necessary to deliver the packet from the source host to its destination. Once all the packets reach the destination, their content is reassembled. Therefore, the Internet does not deal with content besides transporting it through different networks.</p>
+	
+	<p>Once the problem of transporting digital content across different networks has been solved by the Internet, the next challenge in interoperability became the interlinking of Internet resources. The World Wide Web solves this problem by defining another protocol named the <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HyperText Transfer Protocol</a> (HTTP), which provides a mechanism to interrelate resources through hyperlinks. HTTP provides methods to retrieve, create, add, edit and delete Web resources. Web resources are differentiated, with respect to the WWW infrastructure, only by their serialisation formats (MIME types), e.g., an HTML page, an XML file, a JPG/GIF/PNG image, a MP4 video, etc. The actual nature of the resources, i.e., if they represent a given scientific observation, the results of a match or a person, and of the relations between resources are not considered by the Web infrastructure.</p>
+	
+	<p>For the work with data and metadata, these aforementioned infrastructures still pose challenges, especially if we add the requirements of the FAIR principles. The first principle (F1) states that metadata and data should be identified by globally unique and persistent identifiers. Related to this, the FAIR principle A1 requires that metadata and data are retrievable by their identifier using a standardized communications protocol. This means that from the identifiers we should be able to resolve them to something related to the identified entity. Some identifiers are an arbitrary sequence of characters (e.g., <a href="https://www.doi.org" target="_blank">DOI</a>) while others are already presented in a resolvable format (<a href="https://tools.ietf.org/html/rfc3986">URI</a>). With identifiers from the former case, unless the type of identifier and how to create a resolvable link from the identifier is previously known, it is not straightforward to resolve them. Moreover, once we manage to get the resolvable link and try to resolve it, another challenge is what to expect when the identifier is resolved. Currently we are lacking a commonly agreed and predictable resolution behavior, which is an obstacle for artificial agents since, in some occasions, an identifier resolves to its target object, some other times to its metadata and other times to a human-readable HTML landing page.</p>
+	
+	<p>These identified challenges to apply the FAIR principles in the current communication infrastructure were the main motivators for the work on FDOF. And the initial results of this work is reported in this document</p>
 
-  <p>If you have a problem using the W3C specification style sheet,
-  and it is
-
+<h2 id="fdofhistory">
+<span class="secno">2 </span>A brief history of Digital Objects, FAIR Digital Objects and FAIR Digital Object Framework</h2>
+	
+	<p>The concept of <strong>Digital Object</strong> (DO) (in capital letters to denote a particular definition for representing and manipulating digital entities) has been introduced by Robert Kahn in the early 1990s. In his work, Kahn, and later other colleagues, define <em>digital objects</em> as the basic entities of a digital system that are stored, accessed, disseminated and managed. They also defined naming conventions for identifying and locating digital objects as well as described services for using object names to locate and disseminate objects, and provided an access protocol.</p>
+	
+	<p>Later on, the work on DOs has been improved by the definition of the Digital Object Achitecture (DOA) to address the need to support information management beyond just moving information in digital form from one location to another as allowed by the internet. DOA aims at improving interoperability across participating information systems. As defined by the <a href="https://www.dona.net/">DONA Foundation</a> in its<a hreaf="https://www.dona.net/digitalobjectarchitecture"> DOA page, the Digital Object Architecture is composed of:</p>
+	
+	<ul>
+		<li><strong>Digital Object</strong>: "<em>a sequence of bits, or a set of sequences of bits, incorporating a work or portion of a work or other information in which a party has rights or interests, or in which there is value, each of the sequences being structured in a way that is interpretable by one or more of the computational facilities, and having as an essential element an associated unique persistent identifier.</em>"</li>
+		<li><strong>Digital Object Interface Protocol (DOIP)</strong>: "<em>a simple, but powerful conceptual protocol for software applications (“clients”) to interact with “services” which could be either the digital objects or the information systems that manage those digital objects.</em>". The latest specification of DOIP can be found <a href="https://www.dona.net/sites/default/files/2018-11/DOIPv2Spec_1.pdf">here</a>.</li>
+		<li><strong>Identifier/Resolution Protocol (IRP)</strong>: "<em>a rapid-resolution protocol for creating, updating, deleting, and resolving identifiers that are globally managed and allotted. Each identifier is associated with a record that clients can resolve to using this protocol.</em>". </li>
+		<li><strong>Identifier/Resolution System</strong>: the system enables:
+			<ul>
+				<li>"<em>allotment of unique identifiers to information in digital form structured as digital objects regardless of the location of such information or the technology used to serve such information;</em>"</li>
+				<li>"<em>the resolution of the identifiers to current state information about the corresponding digital object, e.g., its location(s), access & usage policies, timestamps, and/or public keys.</em>"</li>
+			</ul>
+		</li>
+		<li><strong>Repository System</strong>: "<em>manages digital objects including the provision of access to such objects based on the use of identifiers, and with integrated security. Through the use of identifiers in the access protocol, the repository system abstracts away the details of the storage technologies from the clients enabling a long-lived mechanism for depositing and accessing digital objects. Access to this system is enabled using the DOIP.</em>"</li>
+		<li><strong>Registry System</strong>: "<em>The registry system is a specialized repository system intended to store metadata about digital objects rather than the digital information itself, and typically stores metadata of digital objects that are managed by one or more repository systems. Access to this system is enabled using the DOIP as well.</em>"</li>
+	</ul>
+	
+	<p>After the publication of the FAIR principles in March 2016, the idea around the Digital Objects evolved to the concept of a FAIR Digital Object in order to better align the features of DOs with the aspects highlighted by the FAIR principles. Since the FAIR principles put significant importance on metadata, one major adittion to the original concept of DO was the introduction of metadata as a particular type of digital object that is used to describe other objects.</p>
+	
+	<p>The term <strong>FAIR Digital Object</strong> (FDO) was first mentioned in a publication in November 2018 in the report named <a href="https://ec.europa.eu/info/publications/turning-fair-reality_en">Turning FAIR into reality</a>, of the European Commission's 2nd High-Level Expert Group on the European Open Science Cloud (EOSC). In this report the author state that the FAIR Digital Objects "<em>represent data, software or other research resources</em>" and "<em>must be accompanied by persistent identifiers, metadata and contextual documentation to enable discovery, citation and reuse</em>".</p>
+	
+	<p>After the publication of the report, the concept of FDO has been constantly worked and refined in a number of <a href="https://www.rd-alliance.org">RDA</a> Interest and Working groups, in particular by the Group of European Data Experts (GEDE).</p>
+	
+	<p>TO DO: Describe the history of FDOF</p>
+	
+	
+		
+	
+<h2 id="fdomodel">
+<span class="secno">3 </span>The FAIR Digital Object model</h2>
+	
+	<!--
+	<p>The FAIR Digital Object Framework defines a predictable identifier resolution behavior, having the identifier resolved into a small piece of information, named the Identifier Record, containing minimally the object’s type, the reference(s) to the object’s location(s) and the reference(s) to its metadata record(s).</p>
+  
+	<p>The <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a> provide a vision of a global ecosystem of dynamically interoperable digital objects such as data, services and computing capacity. This vision entails the requirement to provide machines with  enough actionable information about each of these types of objects so they can automate as much as possible their integration and interoperation. However, to fully realise this vision, we need an infrastructure capable of supporting the interoperation of digital objects according to the requirements defined by the <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a>.</p>
+-->
+	<!--
   <dl class="switch">
     <dt>A bug in the style sheet, which should definitely be fixed
     <dt>A stylistic preference, on which reasonable people can disagree
@@ -217,7 +266,7 @@
     <dd>Fix it in a WG-wide style sheet
     <dt>A styling need which is local to the current construction (e.g. the particular contents of this table need different alignment)
     <dd>Fix it in a document-specific style sheet.
-  </dl>
+ </dl>
 
 <h3 id="conventions">
 <span class="secno">1.1 </span>Document conventions</h3>
@@ -318,7 +367,7 @@ Section Numbers and Anchoring</h3>
   for HTML element property <code>&lt;dl></code>s,
   etc. It can be applied to <code>&lt;table></code>, <code>&lt;pre></code>, or <code>&lt;dl></code>.
 
-   <table class="propdef def">
+ <table class="propdef def">
     <tbody>
      <tr>
       <th>Name:
@@ -350,7 +399,7 @@ Section Numbers and Anchoring</h3>
      <tr>
       <th>Canonical order: 
       <td>N/A 
-   </table>
+ </table>
 
 <h4 id="note">
 <span class="secno">2.2.1 </span> Note Boxes</h2>
@@ -530,12 +579,12 @@ Section Numbers and Anchoring</h3>
       Don't use <code>class=switch</code>
   
     <dt>A branched choice in your technology
-      <dd>Use <code>class=switch</code> on this <code>&lt;dl></code> to provide extra styling
+    <dd>Use <code>class=switch</code> on this <code>&lt;dl></code> to provide extra styling
         that highlights this semantic variant of <code>&lt;dl></code>s,
         if that would help the readability of your document.
 
     <dt>Otherwise
-      <dd>Don't use the <code>switch</code> class on this <code>&lt;dl></code>,
+    <dd>Don't use the <code>switch</code> class on this <code>&lt;dl></code>,
       or <code>&lt;dfn></code> on the contents of the <code>&lt;dt></code> elements.
       Do consider, however, whether the <code>&lt;d></code> elements would be better off
       as headings.
@@ -600,7 +649,7 @@ Section Numbers and Anchoring</h3>
     <dd>For variables
     <dt><code>code</code>
     <dd>For code
-      <dt><code>samp</code>
+    <dt><code>samp</code>
     <dd>For output
     <dt><code>em</code>
     <dd>For stress emphasis within a sentence.
@@ -1514,5 +1563,6 @@ to compare styling.
      <td>
      <td>as specified
   </table>
+-->
 
 <script src="//www.w3.org/scripts/TR/2016/fixup.js"></script>
