@@ -243,17 +243,19 @@
 	
 	<p>After the publication of the report, the concept of FDO has been constantly worked and refined in a number of <a href="https://www.rd-alliance.org">RDA</a> Interest and Working groups, in particular by the Group of European Data Experts (GEDE).</p>
 	
- <p role="note">TO DO: Describe the history of FDOF</p>
+	<p>With the experience in designing technologies and approaches for realising the FAIR principles since the original meeting in January 2014, we have identified a number of challenges to accomplish this goal given the current technologic landscape. In 2019, Luiz Bonino tried to combine features from the (FAIR) Digital Objects with some approaches and features from the Linked Data community, in particular the Linked Data Platform. This experiment led to the emmergence of the FAIR Digital Object Framework (see details in the following sections), which adopts the predictable resolution behavior of the (FAIR) Digital Object approach, its idea of resolving the identifier into a set of information about the object, including its type, metadata and location, and using qualified concepts and relations from Linked Data to better provides machine-actionable semantic descriptions and annotations to the elements of the Framework.</p>
 	
-		
+	<p>The proposal for the FDOF has been first discussed with Barend Mons and George Strawn and, after a few refinements, together with Peter Wittenburg, a series of meetings in Europe, the USA and online involving a number of stakeholders involved in both (F)DO (Peter Wittenburg, Larry Lannon, Robert Quick and others) and Linked Data (Jean-François Abramatic, Eric Prud-hommeaux and others) efforts. These meetings culminated in a gathering at the Paris Observatory on October 28 and 29, 2019. In this meeting a group of representatives of different research communities, RDA, CODATA, GO FAIR, US NAS and EOSC discussed the proposed approach, considered it a promissing candidate for the core technology of the FAIR ecosystem and committed to continue the refinement and evaluation of the framework towards a "<em>running code</em>" phase where a Proof-of-Concept (PoC) is implemented for testing and demonstration. In this context, this document aims at laying the basic description of the FDOF to guide the discussions around the framework and the implementation of the PoC.</p>
+	
 	
 <h2 id="fdomodel">
 <span class="secno">3 </span>The FAIR Digital Object model</h2>
 	
  <p role="note">TO DO: Describe the FDO model</p>
+
 	
 <h2 id="resbehaviour">
-<span class="secno">3 </span>Identifier resolution behaviour</h2>
+<span class="secno">4 </span>Identifier resolution behaviour</h2>
 	
 	<p>In the context of machine-actionability, it is expected that identifiers of digital assets behave in a predictable way so that the artificial agents can know what to expect when an identifier is resolved. Currently, that is not always the case. Current identification systems (Handle system, URIs, etc.) rely on the user's discipline and best practices. For instance, on the Web, someone could use an URI to identify a particular PDF file but the URI may not resolve to anything or it may resolve to something else than the identified object, for instance an HTML page. Similarly, some DOIs resolve to the actual identified object, some to its metadata and many to a landing page. For artificial agents, landing pages are particularly challenging because it is not always (if ever) clear which of the potentially many links present in the page corresponds to the object identified by the DOI.</p>
 	
@@ -281,6 +283,86 @@
 		&nbsp;fdof-o:hasObjectLocation &lt;ObjectLocation&gt; .<br>
 		&nbsp;...
 	</code>
+	
+	<p>The FDOF has not been designed to replace the current infrastructure but to complement it providing extra features supporting better machine-actionability to deal with different types of digital objects. Therefore, the FDOF should coexist with these existing infrastures and, in some cases, leverage from their features. For the FDOF identifier resolution behaviour, an additional protocol can be established and, once evoked, present the intended identifier resolution behaviour.</p>
+	
+	<p class="example">
+		<!--<span class="marker">EXAMPLE 1</span>-->
+		Given the identifier <code>example.com/myImageID</code>, we could use the regular Web infrastructure to resolve the identifier directly into my image: <code>https://example.com/myImageID</code>. However, if this object is part of the FDOF, it could also be resolved using the FDOF identifier resolution protocol by using <code>fdof://example.com/myImageID</code>. In this case, the protocol would return the FDOF Identifier Record containing the objects type reference, metadata reference(s) and location reference(s).
+	</p>
+	
+<h2 id="resbehaviour">
+<span class="secno">5 </span>FDOF Core Ontology</h2>
+	<p>As previously mentioned, the FDOF adopts Semantic Web and Linked Data approaches to provide qualified references to machine-actionable semantic descriptions and annotations to its elements. The semantic descriptions of the core elements of the framework are defined in the FDOF Core Ontology (FDOF-CO). The FDOF-CO is grounding in the Unified Foundational Ontology (UFO) as it provides a solid set of ontological theories relevant to the aims of reducing ambiguity and maximizing conceptual precision and clarity to the descriptions.</p>
+	
+	<p>In the following table we list the elements of the FDOF-CO and a brief explanation for each of them.</p>
+	
+	<table class="propdef def">
+		<tbody>
+			<tr>
+				<th><dfn class="css" id="propdef-text-align">Name</dfn></th>
+				<th><dfn class="css" id="propdef-text-align">Type</dfn></th>
+				<td><dfn class="css" id="propdef-text-align">Description</dfn></td>
+			</tr>
+			<tr>
+				<th>FAIR Digital Object</th>
+				<td>Class</td>
+				<td>An object that can be represented in the digital space and follows the FAIR principles according to the definitions and recommendations of the FDOF.</td>
+			</tr>
+			<tr>
+				<th>Metadata Record</th>
+				<td>Class</td>
+				<td>A record containing information (metadata) about another digital object.</td>
+			</tr>
+			<tr>
+				<th>GUPRI</th>
+				<td>Class</td>
+				<td>Globally unique, persistent and resolvable identifier.</td>
+			</tr>
+			<tr>
+				<th>Metadata Schema</th>
+				<td>Class</td>
+				<td>A schema to define the structure and semantics of Metadata Records.</td>
+			</tr>
+			<tr>
+				<th>PersistencePolicy</th>
+				<td>Class</td>
+				<td>A document defining the conditions under which objects will be persisted.</td>
+			</tr>
+			<tr>
+				<th>hasMetadata</th>
+				<td>Relation</td>
+				<td>Defines the relation between the the object and the Metadata Record(s) that describes it. This relation is present in the FDOF Identifier Record. For some types of objects, e.g., structured data, this relation may also be present in the object itself.</td>
+			</tr>
+			<tr>
+				<th>hasMetadataSchema</th>
+				<td>Relation</td>
+				<td>Defines the relation between the Metadata Record and the schema(s) it conforms to. Multiple schemas may be present as different parts of the Metadata Record may conform to different Metadata Schemas.</td>
+			</tr>
+			<tr>
+				<th>hasPersistencePolicy</th>
+				<td>Relation</td>
+				<td>Defines the relation between an object and the document defining its persistence policy.</td>
+			</tr>
+			<tr>
+				<th>identifier</th>
+				<td>Relation</td>
+				<td>Defines the identity relation between a GUPRI and the object it identifies.</td>
+			</tr>
+			<tr>
+				<th>isMetadataOf</th>
+				<td>Relation</td>
+				<td>Defines the relation between a Metadata Record and the object it identifies.</td>
+			</tr>
+			<tr>
+				<th>isMetadataSchemaOf</th>
+				<td>Relation</td>
+				<td>Defines the relation between a Metadata Schema and Metadata Record(s) conforming to the schema.</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<p class="note">TODO: Add references to UFO. Complete the FDOF-CO. Present diagrams of the ontology and reference to its location. Refine and elaborate the FDOF-CO.</p>
 	
 <h2 id="intro">
 	<span class="secno"> </span> Acknowledgments</h2>
