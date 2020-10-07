@@ -1,29 +1,32 @@
 <!doctype html><html lang="en">
- <head>
-  <meta charset="utf-8">
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>FAIR Digital Object Framework Documentation</title>
-  <link rel="stylesheet" href="W3C-REC.css">
-  <style>
-  .example::before {
-    content: "Example";
-    content: "Example " counter(example);
-  }
-  #example + p + p.example::before {
-    content: "";
-  }
-  .overlarge {
-    margin: 0 !important;
-  }
-  </style>
- </head>
- <body class="h-entry">
-  <div class="head">
-   <h1 id="title">FAIR Digital Object Framework Documentation</h1>
-   <h2 id="subtitle">Working Draft, <time class="dt-updated" datetime="2020-04-05">05 April 2020</time></h2>
-   <div>
-    <dl>
+
+	<head>
+		<meta charset="utf-8">
+		<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>FAIR Digital Object Framework Documentation</title>
+		<link rel="stylesheet" href="W3C-REC.css">
+		<style>
+			.example::before {
+				content: "Example";
+				content: "Example " counter(example);
+			}
+			#example + p + p.example::before {
+				content: "";
+			}
+			.overlarge {
+				margin: 0 !important;
+			}
+		</style>
+	</head>
+	
+	<body class="h-entry">
+		<div class="head">
+			<h1 id="title">FAIR Digital Object Framework Documentation</h1>
+			<h2 id="subtitle">Working Draft, <time class="dt-updated" datetime="2020-04-05">05 April 2020</time></h2>
+			
+			<div>
+				<dl>
      <!--dt>This version:
      <dd><a class="u-url" href="http://fantasai.inkedblade.net/style/design/w3c-restyle/2016/">http://fantasai.inkedblade.net/style/design/w3c-restyle/2016/</a>
      <dt>Latest version:
@@ -37,22 +40,23 @@
      <dt>Issue Tracking:
      <dd><a href="https://github.com/w3c/tr-design/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a-->
-     <dt class="editor">Editor:
-     <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:l.o.bonino@utwente.nl">Luiz Olavo Bonino da Silva Santos</a> (<span class="p-org org">University of Twente, Leiden University Medical Center, GO FAIR International Support and Coordination Office</span>)
-    </dl>
-   </div>
-   <div></div>
-   <hr title="Separator for header">
-  </div>
-  <h2 id="abstract">Abstract</h2>
-  <div>
-	  <p>The FAIR Digital Object Framework (FDOF) defines a model to represent objects in a digital environment. This document discusses the motivations for the framework and describes its elements and the interactions between them.</p>
-  </div>
-  <h2 id="status">Status of this document</h2>
-  <div>
-   <p>This document is the first draft of the FDOF documentation and serves as the basis for the further development and refinement of the framework.</p>
-   <p></p>
-  </div>
+
+					<dt class="editor">Editor:</dt>
+					<dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:l.o.bonino@utwente.nl">Luiz Olavo Bonino da Silva Santos</a> (<span class="p-org org">University of Twente, Leiden University Medical Center, GO FAIR International Support and Coordination Office</span>)</dd>
+				</dl>
+			</div>
+			<div></div>
+			<hr title="Separator for header"/>
+		</div>
+		<h2 id="abstract">Abstract</h2>
+		<div>
+			<p>The FAIR Digital Object Framework (FDOF) defines a model to represent objects in a digital environment. This document discusses the motivations for the framework and describes its elements and the interactions between them.</p>
+		</div>
+		<h2 id="status">Status of this document</h2>
+		<div>
+			<p>This document is the first draft of the FDOF documentation and serves as the basis for the further development and refinement of the framework.</p>
+			<p></p>
+		</div>
 
 	 <!--
 <nav id="toc">
@@ -202,82 +206,86 @@
 </nav>
 
 -->
-<main>
-<h2 id="intro">
-<span class="secno">1 </span> Introduction</h2>
-  
-	<p>The <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a> provide a vision of a global ecosystem of dynamically interoperable digital objects such as data, services and computing capacity. This vision entails the requirement to provide machines with  enough actionable information about each of these types of objects so they can automate as much as possible their integration and interoperation. However, to fully realise this vision, we need an infrastructure capable of supporting the interoperation of digital objects according to the requirements defined by the <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a>.</p>
-	
-	<p>The evolution of the informatics infrastructure  happens in incremental and complementary steps. After the emergence of the computers we felt the need to interconnect them in computer networks. From this, a natural need emerged to integrate different computer networks, which was achieved on a global scale by the Internet through its Internet Protocol (IP) and TCP/UDP protocols. The Internet allows the transportation of digital packets/datagrams from a source  to a destination host across different networks. A given content to be transmitted is broken down in a number of parts named packets. A header is added to each packet containing information necessary to deliver the packet from the source host to its destination. Once all the packets reach the destination, their content is reassembled. Therefore, the Internet does not deal with content besides transporting it through different networks.</p>
-	
- <p>Once the problem of transporting digital content across different networks has been solved by the Internet, the next challenge in interoperability became the interlinking of Internet resources. The World Wide Web solves this problem by defining another protocol named the <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HyperText Transfer Protocol</a> (HTTP), which provides a mechanism to interrelate resources through hyperlinks. HTTP provides methods to retrieve, create, add, edit and delete Web resources. Web resources are differentiated, with respect to the WWW infrastructure, only by their serialisation formats (MIME types), e.g., an HTML page, an XML file, a JPG/GIF/PNG image, a MP4 video, etc. The actual nature of the resources, i.e., if they represent a given scientific observation, the results of a match or a person, and of the relations between resources are not considered by the Web infrastructure.</p>
-	
-	<p>For the work with data and metadata, these aforementioned infrastructures still pose challenges, especially if we add the requirements of the FAIR principles. The first principle (F1) states that metadata and data should be identified by globally unique and persistent identifiers. Related to this, the FAIR principle A1 requires that metadata and data are retrievable by their identifier using a standardized communications protocol. This means that from the identifiers we should be able to resolve them to something related to the identified entity. Some identifiers are an arbitrary sequence of characters (e.g., <a href="https://www.doi.org" target="_blank">DOI</a>) while others are already presented in a resolvable format (<a href="https://tools.ietf.org/html/rfc3986">URI</a>). With identifiers from the former case, unless the type of identifier and how to create a resolvable link from the identifier is previously known, it is not straightforward to resolve them. Moreover, once we manage to get the resolvable link and try to resolve it, another challenge is what to expect when the identifier is resolved. Currently we are lacking a commonly agreed and predictable resolution behavior, which is an obstacle for artificial agents since, in some occasions, an identifier resolves to its target object, some other times to its metadata and other times to a human-readable HTML landing page.</p>
-	
-	<p>These identified challenges to apply the FAIR principles in the current communication infrastructure were the main motivators for the work on FDOF. And the initial results of this work is reported in this document</p>
 
-<h2 id="fdofhistory">
-<span class="secno">2 </span>A brief history of Digital Objects, FAIR Digital Objects and FAIR Digital Object Framework</h2>
-	
-	<p>The concept of <strong>Digital Object</strong> (DO) (in capital letters to denote a particular definition for representing and manipulating digital entities) has been introduced by Robert Kahn in the early 1990s. In his work, Kahn, and later other colleagues, define <em>digital objects</em> as the basic entities of a digital system that are stored, accessed, disseminated and managed. They also defined naming conventions for identifying and locating digital objects as well as described services for using object names to locate and disseminate objects, and provided an access protocol.</p>
-	
-	<p>Later on, the work on DOs has been improved by the definition of the Digital Object Achitecture (DOA) to address the need to support information management beyond just moving information in digital form from one location to another as allowed by the internet. DOA aims at improving interoperability across participating information systems. As defined by the <a href="https://www.dona.net/">DONA Foundation</a> in its<a hreaf="https://www.dona.net/digitalobjectarchitecture"> DOA page, the Digital Object Architecture is composed of:</p>
-	
-	<ul>
-		<li><strong>Digital Object</strong>: "<em>a sequence of bits, or a set of sequences of bits, incorporating a work or portion of a work or other information in which a party has rights or interests, or in which there is value, each of the sequences being structured in a way that is interpretable by one or more of the computational facilities, and having as an essential element an associated unique persistent identifier.</em>"</li>
-		<li><strong>Digital Object Interface Protocol (DOIP)</strong>: "<em>a simple, but powerful conceptual protocol for software applications (“clients”) to interact with “services” which could be either the digital objects or the information systems that manage those digital objects.</em>". The latest specification of DOIP can be found <a href="https://www.dona.net/sites/default/files/2018-11/DOIPv2Spec_1.pdf">here</a>.</li>
-		<li><strong>Identifier/Resolution Protocol (IRP)</strong>: "<em>a rapid-resolution protocol for creating, updating, deleting, and resolving identifiers that are globally managed and allotted. Each identifier is associated with a record that clients can resolve to using this protocol.</em>". </li>
-		<li><strong>Identifier/Resolution System</strong>: the system enables:
+		<main>
+			<h2 id="intro"><span class="secno">1 </span> Introduction</h2>
+			
+			<p>The <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a> provide a vision of a global ecosystem of dynamically interoperable digital objects such as data, services and computing capacity. This vision entails the requirement to provide machines with  enough actionable information about each of these types of objects so they can automate as much as possible their integration and interoperation. However, to fully realise this vision, we need an infrastructure capable of supporting the interoperation of digital objects according to the requirements defined by the <a href="https://www.nature.com/articles/sdata201618">FAIR principles</a>.</p>
+			
+			<p>The evolution of the informatics infrastructure  happens in incremental and complementary steps. After the emergence of the computers we felt the need to interconnect them in computer networks. From this, a natural need emerged to integrate different computer networks, which was achieved on a global scale by the Internet through its Internet Protocol (IP) and TCP/UDP protocols. The Internet allows the transportation of digital packets/datagrams from a source  to a destination host across different networks. A given content to be transmitted is broken down in a number of parts named packets. A header is added to each packet containing information necessary to deliver the packet from the source host to its destination. Once all the packets reach the destination, their content is reassembled. Therefore, the Internet does not deal with content besides transporting it through different networks.</p>
+
+			<p>Once the problem of transporting digital content across different networks has been solved by the Internet, the next challenge in interoperability became the interlinking of Internet resources. The World Wide Web solves this problem by defining another protocol named the <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol">HyperText Transfer Protocol</a> (HTTP), which provides a mechanism to interrelate resources through hyperlinks. HTTP provides methods to retrieve, create, add, edit and delete Web resources. Web resources are differentiated, with respect to the WWW infrastructure, only by their serialisation formats (MIME or media types), e.g., an HTML page, an XML file, a JPG/GIF/PNG image, a MP4 video, etc. The actual nature of the resources, i.e., if they represent a given scientific observation, the results of a match or a person, and of the relations between resources are not considered by the Web infrastructure.</p>
+
+			<p>In the digital realm, we constantly interact with different types of entities, or objects. Examples of such objects are software, software code, dataset and metadata, among others. These objects have different nature. For instance, the nature of a dataset is being a collection of data items grouped because they are interrelated somehow while a software code is a set of instructions written in a programming language that are compiled or interpreted by computers that guide their behaviour. Because of their different nature, each one of these types of digital objects require different ways of interaction. In an increasingly complex digital environment where automation becomes a necessity, the identification of these different types of digital objects become relevant as well as the qualification of the relations between them. This brings additional requirements to the digital ecosystem, which is not properly covered by the internet and World Wide Web.</p>
+
+			<p>The FAIR principles add yet another set of requirements for the aforementioned digital infrastructures. For instance, the first principle (F1) states that metadata and data should be identified by globally unique and persistent identifiers. Related to this, the FAIR principle A1 requires that metadata and data are retrievable by their identifier using a standardized communications protocol. This means that from the identifiers we should be able to resolve them to something related to the identified entity. Some identifiers are an arbitrary sequence of characters (e.g., <a href="https://www.doi.org" target="_blank">DOI</a>) while others are already presented in a resolvable format (<a href="https://tools.ietf.org/html/rfc3986">URI</a>). With identifiers from the former case, unless the type of identifier and how to create a resolvable link from the identifier is previously known, it is not straightforward to resolve them. Moreover, once we manage to get the resolvable link and try to resolve it, the next challenge is what to expect when the identifier is resolved. Currently we lack a commonly agreed and predictable resolution behavior, which is an obstacle for artificial agents since, in some occasions, an identifier resolves to its target object, some other times to its metadata and other times to a human-readable HTML landing page.</p>
+
+			<p>The challenges to apply the FAIR principles in the current digital communication infrastructure were the main motivators for the work on the FAIR Digital Object Framework. The results of this work are reported in this document</p>
+			
+			<h2 id="fdofhistory"><span class="secno">2 </span>A brief history of Digital Objects, FAIR Digital Objects and FAIR Digital Object Framework</h2>
+			
+			<p>The concept of <strong>Digital Object</strong> (DO) (in capital letters to denote a particular definition for representing and manipulating digital entities) has been introduced by Robert Kahn in the early 1990s. In his work, Kahn, and later other colleagues, define <em>digital objects</em> as the basic entities of a digital system that are stored, accessed, disseminated and managed. They also defined naming conventions for identifying and locating digital objects as well as described services for using object names to locate and disseminate objects, and provided an access protocol.</p>
+			
+			<p>Later on, the work on DOs has been improved by the definition of the Digital Object Achitecture (DOA) to address the need to support information management beyond just moving information in digital form from one location to another as allowed by the internet. DOA aims at improving interoperability across participating information systems. As defined by the <a href="https://www.dona.net/">DONA Foundation</a> in its <a href="https://www.dona.net/digitalobjectarchitecture">Digital Object Architecture</a> is composed of:</p>
+			
 			<ul>
-				<li>"<em>allotment of unique identifiers to information in digital form structured as digital objects regardless of the location of such information or the technology used to serve such information;</em>"</li>
-				<li>"<em>the resolution of the identifiers to current state information about the corresponding digital object, e.g., its location(s), access & usage policies, timestamps, and/or public keys.</em>"</li>
+				<li><strong>Digital Object</strong>: "<em>a sequence of bits, or a set of sequences of bits, incorporating a work or portion of a work or other information in which a party has rights or interests, or in which there is value, each of the sequences being structured in a way that is interpretable by one or more of the computational facilities, and having as an essential element an associated unique persistent identifier.</em>"</li>
+				
+				<li><strong>Digital Object Interface Protocol (DOIP)</strong>: "<em>a simple, but powerful conceptual protocol for software applications (“clients”) to interact with “services” which could be either the digital objects or the information systems that manage those digital objects.</em>". The latest specification of DOIP can be found <a href="https://www.dona.net/sites/default/files/2018-11/DOIPv2Spec_1.pdf">here</a>.</li>
+				
+				<li><strong>Identifier/Resolution Protocol (IRP)</strong>: "<em>a rapid-resolution protocol for creating, updating, deleting, and resolving identifiers that are globally managed and allotted. Each identifier is associated with a record that clients can resolve to using this protocol.</em>". </li>
+				
+				<li><strong>Identifier/Resolution System</strong>: the system enables:
+					<ul>
+						<li>"<em>allotment of unique identifiers to information in digital form structured as digital objects regardless of the location of such information or the technology used to serve such information;</em>"</li>
+						<li>"<em>the resolution of the identifiers to current state information about the corresponding digital object, e.g., its location(s), access & usage policies, timestamps, and/or public keys.</em>"</li>
+					</ul>
+				</li>
+				
+				<li><strong>Repository System</strong>: "<em>manages digital objects including the provision of access to such objects based on the use of identifiers, and with integrated security. Through the use of identifiers in the access protocol, the repository system abstracts away the details of the storage technologies from the clients enabling a long-lived mechanism for depositing and accessing digital objects. Access to this system is enabled using the DOIP.</em>"</li>
+				
+				<li><strong>Registry System</strong>: "<em>The registry system is a specialized repository system intended to store metadata about digital objects rather than the digital information itself, and typically stores metadata of digital objects that are managed by one or more repository systems. Access to this system is enabled using the DOIP as well.</em>"</li>
 			</ul>
-		</li>
-		<li><strong>Repository System</strong>: "<em>manages digital objects including the provision of access to such objects based on the use of identifiers, and with integrated security. Through the use of identifiers in the access protocol, the repository system abstracts away the details of the storage technologies from the clients enabling a long-lived mechanism for depositing and accessing digital objects. Access to this system is enabled using the DOIP.</em>"</li>
-		<li><strong>Registry System</strong>: "<em>The registry system is a specialized repository system intended to store metadata about digital objects rather than the digital information itself, and typically stores metadata of digital objects that are managed by one or more repository systems. Access to this system is enabled using the DOIP as well.</em>"</li>
-	</ul>
-	
-	<p>After the publication of the FAIR principles in March 2016, the idea around the Digital Objects evolved to the concept of a FAIR Digital Object in order to better align the features of DOs with the aspects highlighted by the FAIR principles. Since the FAIR principles put significant importance on metadata, one major adittion to the original concept of DO was the introduction of metadata as a particular type of digital object that is used to describe other objects.</p>
-	
-	<p>The term <strong>FAIR Digital Object</strong> (FDO) was first mentioned in a publication in November 2018 in the report named <a href="https://ec.europa.eu/info/publications/turning-fair-reality_en">Turning FAIR into reality</a>, of the European Commission's 2nd High-Level Expert Group on the European Open Science Cloud (EOSC). In this report the author state that the FAIR Digital Objects "<em>represent data, software or other research resources</em>" and "<em>must be accompanied by persistent identifiers, metadata and contextual documentation to enable discovery, citation and reuse</em>".</p>
-	
-	<p>After the publication of the report, the concept of FDO has been constantly worked and refined in a number of <a href="https://www.rd-alliance.org">RDA</a> Interest and Working groups, in particular by the Group of European Data Experts (GEDE).</p>
-	
-	<p>With the experience in designing technologies and approaches for realising the FAIR principles since the original meeting in January 2014, we have identified a number of challenges to accomplish this goal given the current technologic landscape. In 2019, Luiz Bonino tried to combine features from the (FAIR) Digital Objects with some approaches and features from the Linked Data community, in particular the Linked Data Platform. This experiment led to the emmergence of the FAIR Digital Object Framework (see details in the following sections), which adopts the predictable resolution behavior of the (FAIR) Digital Object approach, its idea of resolving the identifier into a set of information about the object, including its type, metadata and location, and using qualified concepts and relations from Linked Data to better provides machine-actionable semantic descriptions and annotations to the elements of the Framework.</p>
-	
-	<p>The proposal for the FDOF has been first discussed with Barend Mons and George Strawn and, after a few refinements, together with Peter Wittenburg, a series of meetings in Europe, the USA and online involving a number of stakeholders involved in both (F)DO (Peter Wittenburg, Larry Lannon, Robert Quick and others) and Linked Data (Jean-François Abramatic, Eric Prud-hommeaux and others) efforts. These meetings culminated in a gathering at the Paris Observatory on October 28 and 29, 2019. In this meeting a group of representatives of different research communities, RDA, CODATA, GO FAIR, US NAS and EOSC discussed the proposed approach, considered it a promissing candidate for the core technology of the FAIR ecosystem and committed to continue the refinement and evaluation of the framework towards a "<em>running code</em>" phase where a Proof-of-Concept (PoC) is implemented for testing and demonstration. In this context, this document aims at laying the basic description of the FDOF to guide the discussions around the framework and the implementation of the PoC.</p>
-	
-	
-<h2 id="fdomodel">
-<span class="secno">3 </span>The FAIR Digital Object model</h2>
-	
- <p role="note">TO DO: Describe the FDO model</p>
-
-	
-<h2 id="resbehaviour">
-<span class="secno">4 </span>Identifier resolution behaviour</h2>
-	
-	<p>In the context of machine-actionability, it is expected that identifiers of digital assets behave in a predictable way so that the artificial agents can know what to expect when an identifier is resolved. Currently, that is not always the case. Current identification systems (Handle system, URIs, etc.) rely on the user's discipline and best practices. For instance, on the Web, someone could use an URI to identify a particular PDF file but the URI may not resolve to anything or it may resolve to something else than the identified object, for instance an HTML page. Similarly, some DOIs resolve to the actual identified object, some to its metadata and many to a landing page. For artificial agents, landing pages are particularly challenging because it is not always (if ever) clear which of the potentially many links present in the page corresponds to the object identified by the DOI.</p>
-	
-	<p>To tackle this issue, the FDOF defines a predictable resolution behaviour. This behaviour is borrowed from the approach used by the Digital Object in which the identifier resolves to an artefact containing relevant information about the object. In FDOF, this artefact is named FDOF's Identifier Record (IR) and contains:</p>
-	
-	<ul>
-		<li>A reference to the object's type;</li>
-		<li>Reference(s) to the object's metadata record(s); and</li>
-		<li>Reference(s) to the object's location(s).</li>
-	</ul>
-	
-	<p>Strictly speaking, the IR is, of course, a type of metadata. In FDOF we opted to differentiate the three pieces of metadata information contained in the IR from other types of metadata information (e.g., provenance, keys, serialization format, size, etc.). The reason behind this differentiation is to separate the minimal information required by the infrastructure to the additional information that can be used by applications, agreed upon by communities, etc. In this way, we can guarantee that any FDOF-enabled applications is able to have the option to identify the type of the object (through the object type reference), directly operate on the object (through the object's location reference) or get more information about the object (through the metadata reference). Other information about the object <strong>SHOULD</strong> be placed in the metadata record(s).</p>
-	
-	 <p>As depicted on Figure 1, the IR presents the information listed above using specific predicates to relate the identifier of the object to the identifiers of its type, its metadata record(s) and its location(s). Moreover, the FDOF-IR <strong>MUST</strong> be presented as RDF, preferably turtle or JSON-LD. This requirement allows not only a predictability of the identifier resolution behaviour but also of the serialisation format of the FDOF-IR, facilitating the implementation of client applications. These client applications would expect to retrieve a FDOF-IR as result of the identifier resolution and can be coded to parse and interpret RDF documents.</p>
-	
-	<figure>
-		<p><img src="diagrams/FDOF-IR.png" alt="FDOF-IR"/></p>
-		<figcaption><span class="marker">Figure 1</span> The FDOF identifier resolution</figcaption>
-	</figure>
-		
-	<p>The following code excerpt is an example of the FDOF-IR in RDF turtle serialisation:</p>
-	<code>
+			
+			<p>After the publication of the FAIR principles in March 2016, the idea around the Digital Objects evolved to the concept of a FAIR Digital Object in order to better align the features of DOs with the aspects highlighted by the FAIR principles. Since the FAIR principles put significant importance on metadata, one major adittion to the original concept of DO was the introduction of metadata as a particular type of digital object that is used to describe other objects.</p>
+			
+			<p>The term <strong>FAIR Digital Object</strong> (FDO) was first mentioned in a publication in November 2018 in the report named <a href="https://ec.europa.eu/info/publications/turning-fair-reality_en">Turning FAIR into reality</a>, of the European Commission's 2nd High-Level Expert Group on the European Open Science Cloud (EOSC). In this report the author state that the FAIR Digital Objects "<em>represent data, software or other research resources</em>" and "<em>must be accompanied by persistent identifiers, metadata and contextual documentation to enable discovery, citation and reuse</em>".</p>
+			
+			<p>After the publication of the report, the concept of FDO has been constantly worked and refined in a number of <a href="https://www.rd-alliance.org">RDA</a> Interest and Working groups, in particular by the Group of European Data Experts (GEDE).</p>
+			
+			<p>With the experience in designing technologies and approaches for realising the FAIR principles since the original meeting in January 2014, we have identified a number of challenges to accomplish this goal given the current technologic landscape. In 2019, Luiz Bonino tried to combine features from the (FAIR) Digital Objects with some approaches and features from the Linked Data community, in particular the Linked Data Platform. From this  experiment FAIR Digital Object Framework emerged (see details in the following sections), which combined the predictable resolution behavior of the (FAIR) Digital Object approach, its idea of resolving the identifier into a set of information about the object, including its type, metadata and location; and the techniques from ontology-driven conceptual modeling, Linked Data and Semantic Web to  provide machine-actionable semantic descriptions and annotations to the elements of the Framework.</p>
+			
+			<p>The proposal for the FDOF has been first discussed with Barend Mons and George Strawn. After a few refinement iterations, together with Peter Wittenburg, a series of meetings were organized in Europe, the USA and online involving a number of stakeholders involved in both (F)DO (Peter Wittenburg, Larry Lannon, Robert Quick and others) and Linked Data (Jean-François Abramatic, Eric Prud-hommeaux and others) efforts. These meetings culminated in a gathering at the Paris Observatory on October 28 and 29, 2019. In this meeting a group of representatives of different research communities, RDA, CODATA, GO FAIR, US NAS and EOSC discussed the proposed approach, considered it a promissing candidate for the core technology of the FAIR ecosystem and committed to continue the refinement and evaluation of the framework towards a "<em>running code</em>" phase where a Proof-of-Concept (PoC) is implemented for testing and demonstration. In this context, this document aims at laying the basic description of the FDOF to guide the discussions around the framework and the implementation of the PoC.</p>
+			
+			<h2 id="fdomodel"><span class="secno">3 </span>The FAIR Digital Object Framework model</h2>
+			
+			<p></p>
+			
+			<p role="note">TO DO: Describe the FDOF model</p>
+			
+			<h2 id="resbehaviour"><span class="secno">4 </span>Identifier resolution behaviour</h2>
+			
+			<p>In the context of machine-actionability, it is expected that identifiers of digital assets behave in a predictable way so that the artificial agents can know what to expect when an identifier is resolved. Currently, that is not always the case. Current identification systems (Handle system, URIs, etc.) rely on the user's discipline and best practices. For instance, on the Web, someone could use an URI to identify a particular PDF file but the URI may not resolve to anything or it may resolve to something else than the identified object, for instance an HTML page. Similarly, some DOIs resolve to the actual identified object, some to its metadata and many to a landing page. For artificial agents, landing pages are particularly challenging because it is not always (if ever) clear which of the potentially many links present in the page corresponds to the object identified by the DOI.</p>
+			
+			<p>To tackle this issue, the FDOF defines a predictable resolution behaviour. This behaviour is borrowed from the approach used by the Digital Object in which the identifier resolves to an artefact containing relevant information about the object. In FDOF, this artefact is named FDOF's Identifier Record (IR) and contains:</p>
+			
+			<ul>
+				<li>A reference to the object's type;</li>
+				<li>Reference(s) to the object's metadata record(s); and</li>
+				<li>Reference(s) to the object's location(s).</li>
+			</ul>
+			
+			<p>Strictly speaking, the IR is, of course, a type of metadata. In FDOF we opted to differentiate the three pieces of metadata information contained in the IR from other types of metadata information (e.g., provenance, keys, serialization format, size, etc.). The reason behind this differentiation is to separate the minimal information required by the infrastructure to the additional information that can be used by applications, agreed upon by communities, etc. In this way, we can guarantee that any FDOF-enabled applications is able to have the option to identify the type of the object (through the object type reference), directly operate on the object (through the object's location reference) or get more information about the object (through the metadata reference). Other information about the object <strong>SHOULD</strong> be placed in the metadata record(s).</p>
+			
+			<p>As depicted on Figure 1, the IR presents the information listed above using specific predicates to relate the identifier of the object to the identifiers of its type, its metadata record(s) and its location(s). Moreover, the FDOF-IR <strong>MUST</strong> be presented as RDF, preferably turtle or JSON-LD. This requirement allows not only a predictability of the identifier resolution behaviour but also of the serialisation format of the FDOF-IR, facilitating the implementation of client applications. These client applications would expect to retrieve a FDOF-IR as result of the identifier resolution and can be coded to parse and interpret RDF documents.</p>
+			
+			<figure>
+				<p><img src="diagrams/FDOF-IR.png" alt="FDOF-IR"/></p>
+				<figcaption><span class="marker">Figure 1</span> The FDOF identifier resolution</figcaption>
+			</figure>
+			
+			<p>The following code excerpt is an example of the FDOF-IR in RDF turtle serialisation:</p>
+			<code>
 		&lt;fdoIdentifier&gt; fdof-o:hasType &lt;FDOType&gt<br>
 		&nbsp;fdof-o:hasMetadata &lt;metadataIdentifier&gt;<br>
 		&nbsp;fdof-o:hasObjectLocation &lt;ObjectLocation&gt; .<br>
@@ -290,19 +298,19 @@
 		<!--<span class="marker">EXAMPLE 1</span>-->
 		Given the identifier <code>example.com/myImageID</code>, we could use the regular Web infrastructure to resolve the identifier directly into my image: <code>https://example.com/myImageID</code>. However, if this object is part of the FDOF, it could also be resolved using the FDOF identifier resolution protocol by using <code>fdof://example.com/myImageID</code>. In this case, the protocol would return the FDOF Identifier Record containing the objects type reference, metadata reference(s) and location reference(s).
 	</p>
-	
-<h2 id="resbehaviour">
-<span class="secno">5 </span>FDOF Core Ontology</h2>
-	<p>As previously mentioned, the FDOF adopts Semantic Web and Linked Data approaches to provide qualified references to machine-actionable semantic descriptions and annotations to its elements. The semantic descriptions of the core elements of the framework are defined in the FDOF Core Ontology (FDOF-CO). The FDOF-CO is grounding in the Unified Foundational Ontology (UFO) as it provides a solid set of ontological theories relevant to the aims of reducing ambiguity and maximizing conceptual precision and clarity to the descriptions.</p>
-	
-	<p>In the following table we list the elements of the FDOF-CO and a brief explanation for each of them.</p>
-	
+			
+			<h2 id="fdof-o"><span class="secno">5 </span>FDOF Core Ontology</h2>
+			<p>As previously mentioned, the FDOF adopts Semantic Web and Linked Data approaches to provide qualified references to machine-actionable semantic descriptions and annotations to its elements. The semantic descriptions of the core elements of the framework are defined in the FDOF Core Ontology (FDOF-CO). The FDOF-CO is grounding in the Unified Foundational Ontology (UFO) as it provides a solid set of ontological theories relevant to the aims of reducing ambiguity and maximizing conceptual precision and clarity to the descriptions.</p>
+			
+			<p>In the following table we list the elements of the FDOF-CO and a brief explanation for each of them.</p>
+			
+			
 	<table class="propdef def">
 		<tbody>
 			<tr>
-				<th><dfn class="css" id="propdef-text-align">Name</dfn></th>
-				<th><dfn class="css" id="propdef-text-align">Type</dfn></th>
-				<td><dfn class="css" id="propdef-text-align">Description</dfn></td>
+				<th><dfn class="css" >Name</dfn></th>
+				<th><dfn class="css" >Type</dfn></th>
+				<td><dfn class="css" >Description</dfn></td>
 			</tr>
 			<tr>
 				<th>FAIR Digital Object</th>
@@ -364,7 +372,7 @@
 	
 	<p class="note">TODO: Add references to UFO. Complete the FDOF-CO. Present diagrams of the ontology and reference to its location. Refine and elaborate the FDOF-CO.</p>
 	
-<h2 id="intro">
+<h2 id="acknowledgments">
 	<span class="secno"> </span> Acknowledgments</h2>
   
  <p>My work on the FDOF did not started and does not continue to happen in a vacuum. As the name of the framework suggests, it has been based on the efforts of many people related to the FAIR and Digital Objects movements. In the DO arena, it started with Robert Kahn defining the initial ideas of Digital Objects followed by Larry Lannon, Robert Quick, Peter Wittenburg and many groups and members of the RDA community refining, expanding, testing and implementing it.</p>
@@ -1684,4 +1692,7 @@ to compare styling.
   </table>
 -->
 
-<script src="//www.w3.org/scripts/TR/2016/fixup.js"></script>
+		<script src="//www.w3.org/scripts/TR/2016/fixup.js"></script>
+		</main>
+	</body>
+</html>
