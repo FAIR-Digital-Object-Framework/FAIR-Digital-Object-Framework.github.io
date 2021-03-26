@@ -42,7 +42,7 @@
      <dd><a href="https://github.com/w3c/tr-design/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a-->
 				  <dt>This version:</dt>
-					<dd>19 March 2021</dd>
+					<dd>26 March 2021</dd>
 					<dt>Date of the first draft:</dt>
 					<dd>05 April 2020</dd>
 				  <dt class="editor">Editor/Author:</dt>
@@ -329,7 +329,7 @@
 						<p style="margin-left: 40px">The FDOF-P GET method requests the retrieval of a representation of the FDOF-IR. The default representation of the FDOF-IR <strong>MUST</strong> be RDF.</p>
 			
 						<p><strong><u>METADATA</u></strong></p>
-						<p style="margin-left: 40px">The FDOF-P METADATA method requests the retrieval of a representation of the object's metadata. The default representation of the metadata record <strong>MUST</strong> be RDF. The response to the METADATA method <strong>MUST</strong> be a Linked Data Platform (LDP) container representing the maximal collection of metadata records containing the reference for each of the object's metadata records. (<em>see the FDOF Ontology section for details</em>)</p>
+						<p style="margin-left: 40px">The FDOF-P METADATA method requests the retrieval of a representation of the object's metadata. The default representation of the metadata record <strong>MUST</strong> be RDF. The response to the METADATA method <strong>MUST</strong> be a Linked Data Platform (LDP) container representing the maximal collection of metadata records for the object. This collection contains the references of each of the object's known metadata records. (<em>see the FDOF Ontology section for details</em>)</p>
 			
 						<p><strong><u>TYPE</u></strong></p>
 						<p style="margin-left: 40px">The FDOF-P TYPE method requests the retrieval of a representation of the object's type. This representation is a reference to the object's type as defined in the FDOF Ontology or its extension. The default representation of the FDOF-IR <strong>MUST</strong> be RDF.</p>
@@ -341,7 +341,7 @@
 
 					<h4 id="fdofresprot"><span class="secno">3.1.2 </span>FDOF-P using HTTP accept headers</h4>
 			
-						<p>Another possibility to implement the FDOF-P features is to use the HTTP accept header parameters. For this we would need to register the FDOF-IR, the FDOF metadata container and the FDOF type description as the following HTTP media types</p>
+						<p>Another possibility to implement the FDOF-P features is to use the HTTP accept header parameters. For this we would need to register the FDOF-IR, the FDOF metadata container and the FDOF type description as the following HTTP media types:</p>
 						
 						<ul>
 							<li><strong>fdof/object</strong> - the media type for the object. This media type is the default for the identifier. Therefore, if no specific accept parameter is informed in request, the server returns the actual target object;</li>
@@ -357,12 +357,29 @@
 							<code>curl -H "Accept: fdof/ir" -X GET https://example.com/myImageID</code>. Retrieves the FDOF-IR.<br>
 							<code>curl -H "Accept: fdof/metadata" -X GET https://example.com/myImageID</code>. Retrieves the object's metadata container.<br>
 							<code>curl -H "Accept: fdof/type" -X GET https://example.com/myImageID</code>. Retrieves the object's type description.<br>
-							
 						</p>
 			
-				<h3 id="metadataaccess"><span class="secno">3.2 </span>Metadata access mechanism</h3>
+						<p>Naturally, this approach of using HTTP media types as the mechanism to resolve to the different elements of the FDOS requires the registration of these media types at the Internet Assigned Numbers Authority (<a href="https://www.iana.org">IANA</a>). The procedures to register new media types are defined in <a href="https://www.iana.org/go/rfc6838">RFC6838</a>, <a href="https://www.iana.org/go/rfc4289">RFC4289</a> and <a href="https://www.iana.org/go/rfc6657">RFC6657</a>.</p>
 			
-					<p class="note">TODO: DESCRIBE THE METADATA ACCESS MECHANISM</p>
+				<h3 id="metadataaccess"><span class="secno">3.2 </span>Metadata access mechanism</h3>
+				
+					<p>The FAIR principles dedicate special attention to metadata. All FAIR principles directly relate to metadata and even some of the (sub)principles mentioning data (in practice, any type of digital object) require work on metadata. For instance, in FAIR principle F2 we have that <i>data are described with rich metadata</i>. Therefore, for the data to follow this principle, it is required that we have rich metadata to describe them. In another example, the sub-principle R1.1 states that <i>data are released with a clear and accessible data usage license</i>. The attribution of a license to the data is commonly infomed in the data's metadata.</p>
+			
+					<p>With such an important role in the FAIR principles, the FDOF naturally provides support for the digital object's metadata. Part of this support comes from the FDOF's metadata access mechanism. In order to facilitate the access to the metadata for client applications, the FDOF provides a common metadata access mechanism so that applications can request access to the metadata of the digital object given its identifier. The usage scenario that illustrates the intended support is that once an identifier has been found, the client application (or its user) may need to gather more information about the identified digital object before deciding whether to deal with the actual object. A common mechansim for such access is important to facilitate interoperability in the sense that any FDOF-enabled client application knows how to access an object's metadata instead of leaving to every services to define their own access mechanisms.</p>
+			
+					<p>As described in <a href="#fdofresprot">section 3.1.1</a>and depict in Figure 3, the client application can directly request the metadata of the object from its identifier using the <strong>METADATA</strong> method. This method returns a LDP container representation containing the identifiers of all known metadata records for that object.</p>
+			
+					<figure>
+						<p><img src="images/diagrams/directmetadataaccess_sequence.png" alt="direct metadata access"/></p>
+						<figcaption><span class="marker">Figure 3</span> Direct metadata access</figcaption>
+					</figure>
+			
+					<p>Another way to obtain access to the object's metadata, as depicted in Figure 4 is through its Identifier Record. Since the IR contains also the LDP container of the object's metadata records, once the application retrieves the IR, it can search in the IR for the references of the metadata records.</p>
+			
+					<figure>
+						<p><img src="images/diagrams/indirectmetadataaccess_sequence.png" alt="indirect metadata access"/></p>
+						<figcaption><span class="marker">Figure 4</span> Indirect metadata access</figcaption>
+					</figure>
 			
 				<h3 id="typingsystem"><span class="secno">3.3 </span>Object typing system</h3>
 			
