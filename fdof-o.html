@@ -18,6 +18,15 @@
 				margin: 0 !important;
 			}
 		</style>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-THD7CRFL5W"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-THD7CRFL5W');
+        </script>
 	</head>
 	
 	<body class="h-entry">
@@ -355,7 +364,7 @@
 							Given the identifier <code>example.com/myImageID</code>, we could use the regular Web infrastructure to resolve the identifier directly into my image: <code>GET https://example.com/myImageID</code>. However, if this object is part of the FDOF, its identifier could also be resolved using the FDOF identifier resolution protocol by using <code>GET fdof://example.com/myImageID</code>. In this case, if the client, instead of the object itself would like to retrieve the object's IR, it could use <code>GETIR fdof://example.com/myImageID</code>.
 						</p>
 
-					<h4 id="fdofresprot"><span class="secno">3.1.2 </span>FDOF-P using HTTP accept headers</h4>
+					<h4 id="fdofhttpaccept"><span class="secno">3.1.2 </span>FDOF-P using HTTP accept headers</h4>
 			
 						<p>Another possibility to implement the FDOF-P features is to use the HTTP accept header parameters. For this we would need to register the FDOF-IR, the FDOF metadata container and the FDOF type description as the following HTTP media types:</p>
 						
