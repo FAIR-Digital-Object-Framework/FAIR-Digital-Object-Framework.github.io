@@ -18,6 +18,15 @@
 				margin: 0 !important;
 			}
 		</style>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-THD7CRFL5W"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-THD7CRFL5W');
+        </script>
 	</head>
 	
 	<body class="h-entry">
@@ -54,7 +63,7 @@
 		</div>
 		<h2 id="abstract">Abstract</h2>
 		<div>
-			<p>The FAIR Digital Object Framework (FDOF)<strong> is a framework which defines a model to represent objects in a digital environment</strong>. The framework  is comprised of <strong>a predictable identifier resolution behaviour,       a mechanism to retrieve the object's metadata and an object typing system</strong>. The main goal of the FDOF is to define a set of features to provide foundational support for the FAIR principles. 
+			<p>The FAIR Digital Object Framework (FDOF)<strong> is a framework which defines a model to represent objects in a digital environment</strong>. The framework  is comprised of <strong>a predictable identifier resolution behaviour,       a mechanism to retrieve the object's metadata and an object typing system</strong>. The main goal of the FDOF is to define a set of features to provide foundational support for the FAIR principles.</p>
 			<p>In the FDOF, a <strong>FAIR Digital Object is defined as a sequence of bits that represents a machine-actionable informational unit, identified by a globally-unique, persistent and resolvable identifier with a predictable resolution behaviour, described by related metadata records (FDOs themselves) and classified by the FDOF typing system</strong>.</p>
 			<p>This document discusses the motivations for the framework and describes its elements and their interactions.</p>
 		</div>
@@ -357,7 +366,7 @@
 							Given the identifier <code>example.com/myImageID</code>, we could use the regular Web infrastructure to resolve the identifier directly into my image: <code>GET https://example.com/myImageID</code>. However, if this object is part of the FDOF, its identifier could also be resolved using the FDOF identifier resolution protocol by using <code>GET fdof://example.com/myImageID</code>. In this case, if the client, instead of the object itself would like to retrieve the object's IR, it could use <code>GETIR fdof://example.com/myImageID</code>.
 						</p>
 
-					<h4 id="fdofresprot"><span class="secno">3.1.2 </span>FDOF-P using HTTP accept headers</h4>
+					<h4 id="fdofhttpaccept"><span class="secno">3.1.2 </span>FDOF-P using HTTP accept headers</h4>
 			
 						<p>Another possibility to implement the FDOF-P features is to use the HTTP accept header parameters. For this we would need to register the FDOF-IR, the FDOF metadata container and the FDOF type description as the following HTTP media types:</p>
 						
