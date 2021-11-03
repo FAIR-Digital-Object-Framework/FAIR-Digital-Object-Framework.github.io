@@ -304,7 +304,7 @@
 				<p>Figure 2 depicts a simplified model for FAIR Digital Objects in the FDOF. When a digital object (bit sequence) is identified by a globally unique, persistent and resolvable identifier, characterised by the FDOF typing system and described by metadata records, we can say that we have a FAIR Digital Object.</p>
 			
 				<figure>
-					<p><img src="images/FDO_simplified.png" alt="FDO simplified model"/></p>
+					<p><img src="images/diagrams/FDO_simplified.png" alt="FDO simplified model"/></p>
 					<figcaption><span class="marker">Figure 2</span> Simplified model of FAIR Digital Objects</figcaption>
 				</figure>
             
@@ -325,7 +325,7 @@
 					<p>The FDOF-IR is, of course, a specific type of metadata, as depicted in Figure 3. In FDOF we opted to differentiate the three pieces of metadata information contained in the IR from other types of metadata information (e.g., provenance, keys, serialization format, size, etc.). The reason behind this differentiation is to separate the minimal information required by the infrastructure to the additional information that can be used by applications, agreed upon by communities, etc. In this way, we can guarantee that any FDOF-enabled application is able to identify the type of the object (through the reference to the object's type), directly operate on the object (through the object's location reference) or get more information about the object (through reference(s) to the object's metadata record(s)). Other information about the object <strong>SHOULD</strong> be placed in the metadata record(s).</p>
             
                     <figure>
-						<p><img src="images/FDOF-IR.png" alt="FDOF-IR"/></p>
+						<p><img src="images/diagrams/FDOF-IR.png" alt="FDOF-IR"/></p>
 						<figcaption><span class="marker">Figure 3</span> The FDOF Identifier Record</figcaption>
 					</figure>
             
@@ -335,7 +335,7 @@
 					<p>As depicted on Figure 4, the FDOF-IR can be resolved from the object's identifier and present its content using specific predicates to relate the object with its type, its metadata record(s) and its location(s). Moreover, the FDOF does not only provide methods to guarantee a predictable resolution behaviour for the identifier resolution but also defines the format to guarantee predicatability of the metadata presentation format. Therefore, the FDOF-IR <strong>MUST</strong> be presented as RDF, minimally using the Turtle and JSON-LD syntaxes. This requirement allows not only a predictability of the identifier resolution behaviour but also of the serialisation format of the FDOF-IR, facilitating the implementation of client applications. These client applications would expect to retrieve a FDOF-IR as result of the identifier resolution and can be coded to parse and interpret RDF documents. The choice for RDF as the presentation format for the Identifier Record (and the other types of metadata records) is due to the support of RDF to explicitly provied semantic annotations together with the data content. In this way, the FDOF supports improvements in semantic interoperability and machine actionability.</p>
 
 					<figure>
-						<p><img src="images/FDOF-IR_resolution.png" alt="FDOF-IR"/></p>
+						<p><img src="images/diagrams/FDOF-IR_resolution.png" alt="FDOF-IR"/></p>
 						<figcaption><span class="marker">Figure 4</span> The FDOF identifier resolution behaviour</figcaption>
 					</figure>
             
@@ -407,7 +407,7 @@
 			
 					<p>With such an important role in the FAIR principles, the FDOF naturally provides support for the digital object's metadata. Part of this support comes from the FDOF's metadata access mechanism. In order to facilitate the access to the metadata for client applications, the FDOF provides a common metadata access mechanism so that applications can request access to the metadata of the digital object given its identifier. The usage scenario that illustrates the intended support is that once an identifier has been found, the client application (or its user) may need to gather more information about the identified digital object before deciding whether to deal with the actual object. A common mechansim for such access is important to facilitate interoperability in the sense that any FDOF-enabled client application knows how to access an object's metadata instead of leaving to every services to define their own access mechanisms.</p>
 			
-					<p>As described in <a href="#fdofresprot">section 3.1.1</a> and depicted in Figure 3, the client application can directly request the metadata of the object from its identifier using the <strong>METADATA</strong> method. This method returns a LDP container representation containing the identifiers of all known metadata records for that object.</p>
+					<p>As described in <a href="#fdofresprot">section 3.1.1</a> and depicted in Figure 4, the client application can directly request the metadata record(s) of the object from its identifier using the <strong>GETMETADATA</strong> method. This method returns a LDP container representation containing the containment structure having as members all known metadata records for that object.</p>
 			
 					<figure>
 						<p><img src="images/diagrams/directmetadataaccess_sequence.png" alt="direct metadata access"/></p>
@@ -436,7 +436,7 @@
                     <p>Since different types of digital objects may be described with different sets of properties, the FDOF typing system can determine specific metadata schemas for specific FDO types, as depicted in Figure 5. A metadata schema defines which properties must or may be present in a given metadata record. One can argue that we will never be able to define a metadata schema that includes all possible properties that are needed for all applications of the metadata. Therefore, in the FDOF, the metadata schemas associated with FDO types define a minimal set of properties. This minimal set of properties guarantee a level of predictability so that users (humans or machines) can expect these properties to be available as descriptors of a FDO of a given type. Naturally, communities, users, object providers or any other stakeholder can add more properties and/or define additional metadata schemas for the FDOs. The more properties, the richer are the metadata records. Once again, the FDOF's type-specific metadata schemas define just a base set of properties that can, and should, be augmented.</p>
 
                     <figure>
-                        <p><img src="images/FDO_simplifiedwithmetadataschema.png" alt="FDO simplified model with metadata schema"/></p>
+                        <p><img src="images/diagrams/FDO_simplifiedwithmetadataschema.png" alt="FDO simplified model with metadata schema"/></p>
                         <figcaption><span class="marker">Figure 5</span> FDO types and metadata schemas</figcaption>
                     </figure>
 
