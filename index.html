@@ -301,35 +301,45 @@
 					<li>Object typing system;</li>
 				</il>
 			
-				<p>Figure 2 depicts a simplified model for FAIR Digital Objects in the FDOF. In this model we have that (globally unique, persistent and resolvable) identifiers identify digital objects (bit sequences) that are characterised by the  FDP typing system and described by    metadata record(s).</p>
+				<p>Figure 2 depicts a simplified model for FAIR Digital Objects in the FDOF. When a digital object (bit sequence) is identified by a globally unique, persistent and resolvable identifier, characterised by the FDOF typing system and described by metadata records, we can say that we have a FAIR Digital Object.</p>
 			
 				<figure>
 					<p><img src="images/FDO_simplified.png" alt="FDO simplified model"/></p>
-					<figcaption><span class="marker">Figure 2</span> Simplified model for FAIR Digital Objects</figcaption>
+					<figcaption><span class="marker">Figure 2</span> Simplified model of FAIR Digital Objects</figcaption>
 				</figure>
-
+            
 				<h3 id="resbehaviour"><span class="secno">3.1 </span>Predictable identifier resolution behaviour</h3>
 			
-					<p>In the context of machine-actionability, it is expected that identifiers of digital objects behave in a predictable way so that the artificial agents can know what to expect when an identifier is resolved. Currently, that is not always the case. Current identification systems (Handle system, URIs, etc.) rely on the user's discipline and best practices. For instance, on the Web, one could use an URI to identify a particular PDF file but the URI may not resolve to anything or it may resolve to something else than the identified object, for instance an HTML page. Similarly, some DOIs (an implementation of the Handle system) resolve the identifier to the actual identified object, some to its metadata and many to a landing page. For artificial agents, landing pages are particularly challenging because it is not always (if ever) clear which of the potentially many links present in the page corresponds to the object identified by the DOI. The DOI example (<a href="https://doi.org/10.1109/5.771073">DOI:10.1109/5.771073</a>) on its homepage (<a href="https://doi.org">www.doi.org</a>) is the identifier of an article named <em>Toward unique identifiers</em> published by IEEE. From a browser or from a command line <code>curl</code> request, this identifier resolves to the landing page of the paper. In the HTML code of this landing page we can find tens of URLs, including URLs for advertisements on the page. Only one of these URLs is the link to the actual article in PDF. An artificial client would have difficulties in identifying which of these many URLs points to the object of interest. To tackle this issue, the FDOF defines a predictable resolution behaviour.</p>
+					<p>In the context of machine-actionability, it is expected that identifiers of digital objects behave in a predictable way so that the artificial agents can know what to expect when an identifier is resolved. Currently, that is not always the case. Current identification systems (Handle system, URIs, etc.) rely on the user's discipline and best practices. For instance, on the Web, one could use an URI to identify a particular PDF file but the URI may not resolve to anything or it may resolve to something else than the identified object, for instance an HTML page. Similarly, some DOIs (an implementation of the Handle system) resolve the identifier to the actual identified object, some to its metadata and many to a landing page. For artificial agents, landing pages are particularly challenging because it is not always (if ever) clear which of the potentially many links present in the page corresponds to the object identified by the DOI. The DOI example (<a href="https://doi.org/10.1109/5.771073">DOI:10.1109/5.771073</a>) on its homepage (<a href="https://doi.org">www.doi.org</a>) is the identifier of an article named <em>Toward unique identifiers</em> published by IEEE. From a browser or from a command line <code>curl</code> request, this identifier resolves to the landing page of the paper. In the HTML code of this landing page we can find over a hundred of URLs, including URLs for advertisements on the page. Only one of these URLs refers to the actual PDF file of the article. An artificial client would have difficulties in identifying which of these many URLs points to the object of interest. To tackle this issue, the FDOF defines a predictable resolution behaviour.</p>
 
-					<p>In the realm of Digital Objects, each identifier is associated with an identifier record containing so-called state information. There, a client can resolve the DO identifier to this identifier record. resolves to an artefact containing relevant information about the object. The DO specifications define its own identifier in the form of prefix and suffix where the prefix is first resolved to locate the specific identifier resolution service.</p>
+					<p>In the realm of Digital Objects, each identifier is associated with an identifier record containing so-called state information. There, a client can resolve the DO identifier to this identifier record, which is&nbsp;an artefact containing relevant information about the object.</p>
 					
 					<p>In  FDOF, similar to DO, we have an identifier record named FDOF's Identifier Record (FDOF-IR), a specific type of metadata, containing information about:</p>
 
 					<ul>
 						<li>The object's type;</li>
 						<li>The object's metadata record(s); and</li>
-						<li>Reference(s) to the object's location(s).</li>
+						<li>The object's location(s).</li>
 					</ul>
 
-					<p>The FDOF-IR is, of course, a specific type of metadata. In FDOF we opted to differentiate the three pieces of metadata information contained in the IR from other types of metadata information (e.g., provenance, keys, serialization format, size, etc.). The reason behind this differentiation is to separate the minimal information required by the infrastructure to the additional information that can be used by applications, agreed upon by communities, etc. In this way, we can guarantee that any FDOF-enabled application is able to identify the type of the object (through the object type reference), directly operate on the object (through the object's location reference) or get more information about the object (through the metadata reference). Other information about the object <strong>SHOULD</strong> be placed in the metadata record(s).</p>
+					<p>The FDOF-IR is, of course, a specific type of metadata, as depicted in Figure 3. In FDOF we opted to differentiate the three pieces of metadata information contained in the IR from other types of metadata information (e.g., provenance, keys, serialization format, size, etc.). The reason behind this differentiation is to separate the minimal information required by the infrastructure to the additional information that can be used by applications, agreed upon by communities, etc. In this way, we can guarantee that any FDOF-enabled application is able to identify the type of the object (through the reference to the object's type), directly operate on the object (through the object's location reference) or get more information about the object (through reference(s) to the object's metadata record(s)). Other information about the object <strong>SHOULD</strong> be placed in the metadata record(s).</p>
+            
+                    <figure>
+						<p><img src="images/FDOF-IR.png" alt="FDOF-IR"/></p>
+						<figcaption><span class="marker">Figure 3</span> The FDOF Identifier Record</figcaption>
+					</figure>
+            
 
-					<p>As depicted on Figure 3, the FDOF-IR can be resolved from the object's identifier (see <a href="#fdofresprot">section 3.1.1</a>) and presents the information listed above using specific predicates to relate the identifier of the object to the identifiers of its type, its metadata record(s) and its location(s). Moreover, the FDOF-IR <strong>MUST</strong> be presented as RDF, preferably turtle or JSON-LD. This requirement allows not only a predictability of the identifier resolution behaviour but also of the serialisation format of the FDOF-IR, facilitating the implementation of client applications. These client applications would expect to retrieve a FDOF-IR as result of the identifier resolution and can be coded to parse and interpret RDF documents.</p>
+                    <p>An identifier is used to identify an object. Therefore, it is natural to expect that the default identifier resolution behaviour resolves to the target object. However, since the Identifier Record provides information about the object that is particularly valuable when the client is not yeat familiar with the object, e.g., the client just discovered an object identifier and does not know anything about the object. Because of this, it is relevant for the FDOF to support an additional method to resolve the identifier to its identifier record.</p>
+            
+					<p>As depicted on Figure 4, the FDOF-IR can be resolved from the object's identifier and present its content using specific predicates to relate the object with its type, its metadata record(s) and its location(s). Moreover, the FDOF does not only provide methods to guarantee a predictable resolution behaviour for the identifier resolution but also defines the format to guarantee predicatability of the metadata presentation format. Therefore, the FDOF-IR <strong>MUST</strong> be presented as RDF, minimally using the Turtle and JSON-LD syntaxes. This requirement allows not only a predictability of the identifier resolution behaviour but also of the serialisation format of the FDOF-IR, facilitating the implementation of client applications. These client applications would expect to retrieve a FDOF-IR as result of the identifier resolution and can be coded to parse and interpret RDF documents. The choice for RDF as the presentation format for the Identifier Record (and the other types of metadata records) is due to the support of RDF to explicitly provied semantic annotations together with the data content. In this way, the FDOF supports improvements in semantic interoperability and machine actionability.</p>
 
 					<figure>
-						<p><img src="images/diagrams/FDOF-IR.png" alt="FDOF-IR"/></p>
-						<figcaption><span class="marker">Figure 2</span> The FDOF identifier resolution</figcaption>
+						<p><img src="images/FDOF-IR_resolution.png" alt="FDOF-IR"/></p>
+						<figcaption><span class="marker">Figure 4</span> The FDOF identifier resolution behaviour</figcaption>
 					</figure>
+            
+                    <p>Figure 4 depicts that the identifier can be resolved to either the digital object or to its Identifier Record. Naturally, different resolution methods are used to each case as described in <a href="#fdofresprot">section 3.1.1</a>.</p>
 
 					<p class="example">
 						<!--<span class="marker">EXAMPLE 1</span>-->
@@ -344,7 +354,9 @@
 						</code>
 					</p>					
 
-					<p>The FDOF is not intended to replace the current digital communication infrastructure but to complement it providing extra features supporting better machine-actionability to deal with different types of digital objects. Therefore, the FDOF should coexist with these existing infrastures and, in some cases, leverage from their features. To allow a minimum impact on the current communication infrastructure, the FDOF identifier resolution behaviour, as default, resolves directly to the target object. However, the client has the option of requesting the identifier to resolve to the FDOF-IR instead. For the extra features of the FDOF identifier resolution behaviour we can implement them by creating an additional protocol which, once evoked, present these extra resolution features or leverage the current HTTP mechanism for content negotiation.</p>
+					<p>The FDOF is not intended to replace the current digital communication infrastructure but to complement it providing extra features supporting better machine-actionability to deal with different types of digital objects. Therefore, the FDOF should coexist with these existing infrastures and, in some cases, leverage from their features. To allow a minimum impact on the current communication infrastructure, the FDOF identifier resolution behaviour, as default, resolves directly to the target object. However, the client has the option to request the identifier to resolve to the FDOF-IR instead. Since the FDOF-IR provides information about the object's type and metadata, the FDOF resolution behaviour can also offer method to directly request these types of information. These methods are just to avoid the need to retrieve the FDOF-IR, interpret it and then get the information. Instead, the protocol described below can directly return the references to the object's metadata records (GETMETADATA) or the object type (GETYPE).</p>
+                    
+                    <p>For the extra features of the FDOF identifier resolution behaviour we can implement them by creating an additional protocol which, once evoked, present these extra resolution features or leverage the current HTTP mechanism for content negotiation.</p>
 			
 					<h4 id="fdofresprot"><span class="secno">3.1.1 </span>FDOF resolution protocol</h4>
 			
@@ -356,10 +368,10 @@
 						<p><strong><u>GETIR</u></strong></p>
 						<p style="margin-left: 40px">The FDOF-P GET method requests the retrieval of a representation of the FDOF-IR. The default representation of the FDOF-IR <strong>MUST</strong> be RDF.</p>
 			
-						<p><strong><u>METADATA</u></strong></p>
+						<p><strong><u>GETMETADATA</u></strong></p>
 						<p style="margin-left: 40px">The FDOF-P METADATA method requests the retrieval of a representation of the object's metadata. The default representation of the metadata record <strong>MUST</strong> be RDF. The response to the METADATA method <strong>MUST</strong> be a Linked Data Platform (LDP) container representing the maximal collection of metadata records for the object. This collection contains the references of each of the object's known metadata records. (<em>see the FDOF Ontology section for details</em>)</p>
 			
-						<p><strong><u>TYPE</u></strong></p>
+						<p><strong><u>GETTYPE</u></strong></p>
 						<p style="margin-left: 40px">The FDOF-P TYPE method requests the retrieval of a representation of the object's type. This representation is a reference to the object's type as defined in the FDOF Ontology or its extension. The default representation of the FDOF-IR <strong>MUST</strong> be RDF.</p>
 			
 						<p class="example">
@@ -411,16 +423,24 @@
 			
 				<h3 id="typingsystem"><span class="secno">3.3 </span>Object typing system</h3>
 			
-					<p class="note">TODO: DESCRIBE THE OBJECT TYPING SYSTEM</p>
-			
 					When dealing with objects in general, a common question is "What is this object?". Although seemly simple, this question may have answers reflecting different aspects of the object. For instance, if we are looking at a photograph, some may say that the object in question is a photo while other may refer to what is the content of the photograph, e.g., a mountain. In the digital world, there is yet another aspect under consideration which is the encoding format of the object, e.g., JPG, GIF, PNG, etc. In the FDOF, the typing system reflects these concerns and provide information about:
 			
 					<ul>
-						<li>The type of the digital object with respect to its informational function, e.g., image, video, dataset, service, etc.;</li>
 						<li>The encoding format of the digital object, e.g., JSON, XML, RDF, JPG, DOCX, etc.;</li>
+                        <li>The type of the digital object with respect to its informational function, e.g., image, video, dataset, service, etc.;</li>
 						<li>The entity(ies) that are represented by the digital object, e.g., the mountain in a photo, a given protein in a protein dataset.</li>
 					</ul>
-			
+            
+                    <p>The FAIR principle F2 states that "<em>data are described with rich metadata</em>". This principle, then, defines that metadata have the function of describing digital objects. In practice we have that metadata records contain a set of property attributions that helps describe a given object. Some of these properties may be common to any digital object and some may be specific to certain types of objects.</p>
+            
+                    <p>Since different types of digital objects may be described with different sets of properties, the FDOF typing system can determine specific metadata schemas for specific FDO types, as depicted in Figure 5. A metadata schema defines which properties must or may be present in a given metadata record. One can argue that we will never be able to define a metadata schema that includes all possible properties that are needed for all applications of the metadata. Therefore, in the FDOF, the metadata schemas associated with FDO types define a minimal set of properties. This minimal set of properties guarantee a level of predictability so that users (humans or machines) can expect these properties to be available as descriptors of a FDO of a given type. Naturally, communities, users, object providers or any other stakeholder can add more properties and/or define additional metadata schemas for the FDOs. The more properties, the richer are the metadata records. Once again, the FDOF's type-specific metadata schemas define just a base set of properties that can, and should, be augmented.</p>
+
+                    <figure>
+                        <p><img src="images/FDO_simplifiedwithmetadataschema.png" alt="FDO simplified model with metadata schema"/></p>
+                        <figcaption><span class="marker">Figure 5</span> FDO types and metadata schemas</figcaption>
+                    </figure>
+
+                <p class="note">TODO: COMPLETE THE OBJECT TYPING SYSTEM</p>
 		<h2 id="fdof-o"><span class="secno">4 </span>FDOF Core Ontology</h2>
 			<p class="note">NOTE: PLACEHOLDER FOR THE LINK TO THE FDOF CORE ONTOLOGY (FDOF-O)</p>
 			
