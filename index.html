@@ -51,11 +51,14 @@
      <dd><a href="https://github.com/w3c/tr-design/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a-->
 				  <dt>This version:</dt>
-					<dd>03 November 2021</dd>
+					<dd>19 September 2022</dd>
 					<dt>Date of the first draft:</dt>
 					<dd>05 April 2020</dd>
 				  <dt class="editor">Editor/Author:</dt>
-					<dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:l.o.bonino@utwente.nl">Luiz Olavo Bonino da Silva Santos</a> (<span class="p-org org">University of Twente, Leiden University Medical Center, GO FAIR International Support and Coordination Office</span>)</dd>
+					<dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:l.o.boninodasilvasantos@utwente.nl">Luiz Olavo Bonino da Silva Santos</a> (<span class="p-org org">University of Twente, Leiden University Medical Center</span>)</dd>
+                  <dt class="editor">Contributors:</dt>
+					<dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:g.guizzardi@utwente.nl">Giancarlo Guizzardi</a> (<span class="p-org org">University of Twente</span>)</dd>
+                    <dd class="editor p-author h-card vcard"><a class="p-name fn u-url url" href="mailto:t.princesales@utwente.nl">Tiago Prince Sales</a> (<span class="p-org org">University of Twente</span>)</dd>
 				</dl>
 			</div>
 			<div></div>
@@ -63,9 +66,9 @@
 		</div>
 		<h2 id="abstract">Abstract</h2>
 		<div>
-			<p>The FAIR Digital Object Framework (FDOF)<strong> is a framework which defines a model to represent objects in a digital environment</strong>. The framework  consists of <strong>a predictable identifier resolution behaviour, a mechanism to retrieve the object's metadata and an object typing system</strong>. The main goal of the FDOF is to define a set of features to provide foundational support for the FAIR principles.</p>
+			<p>The FAIR Digital Object Framework (FDOF)<strong> is a framework which defines a model to represent objects in a digital environment and a mechanism to create, maintain and (re)use these objects&nbsp;</strong>. The framework  consists of <strong>a predictable identifier resolution behaviour, a mechanism to retrieve the object's metadata and an object typing system</strong>. The main goal of the FDOF is to define a set of features to provide foundational support for the FAIR principles.</p>
             
-			<p>In the FDOF, a digital object is a bit sequence located in a digital memory or storage that has, on its own, an informational value, i.e., the bit sequence represents an informational unit such as a document, a dataset, a photo, a service, etc. When this digital object is presented following the FAIR principles we have a FAIR Digital Object. In summary, in the FDOF a <strong>FAIR Digital Object is defined as a sequence of bits that represents an informational unit and is presented according to the FAIR principles.</strong> To be classified as a FAIR Digital Object (FDO), a digital object is identified by a globally-unique, persistent and resolvable identifier with a predictable resolution behaviour, described by related metadata records (FDOs themselves) and classified by the FDOF typing system</strong>.</p>
+			<p>In the FDOF, a digital object is a bit sequence located in a digital memory or storage that has, on its own, an informational value, i.e., the bit sequence represents an informational unit such as a document, a dataset, a photo, a service, etc. When this digital object is presented following the FAIR principles we have a FAIR Digital Object. In summary, in the FDOF a <strong>FAIR Digital Object is defined as a sequence of bits that represents an informational unit and is presented according to the FAIR principles.</strong> To be classified as a FAIR Digital Object (FDO), a digital object is identified by a globally-unique, persistent and resolvable identifier with a predictable resolution behaviour, described by related metadata records (FDOs themselves) and classified by the FDOF typing system.</p>
 			<p>This document discusses the motivations for the framework and describes its elements and their interactions.</p>
 	</div>
 		<h2 id="status">Status of this document</h2>
@@ -280,7 +283,10 @@
 
 				<p>With the experience in designing technologies and approaches for realising the FAIR principles since the original meeting in January 2014, we have identified a number of challenges to accomplish this goal given the current technologic landscape. In May 2019, I experimented combining features from the (FAIR) Digital Objects with some approaches and features from the Linked Data community, in particular the Linked Data Platform. From this experiment the FAIR Digital Object Framework emerged, which combined the predictable resolution behavior of the (FAIR) Digital Object approach, its idea of resolving the identifier into a small set of information about the object; and the techniques from ontology-driven conceptual modeling, Linked Data and Semantic Web to provide machine-actionable semantic descriptions and annotations to the elements of the Framework.</p>
 
-				<p>The proposal for the FDOF has been first discussed with Barend Mons and George Strawn. After a few refinement iterations, together with Peter Wittenburg, a series of meetings were organized in Europe, in the USA and online involving a number of stakeholders involved in both (F)DO (Peter Wittenburg, Larry Lannom, Robert Quick and others) and Linked Data (Jean-François Abramatic, Eric Prud-hommeaux and others) efforts. These meetings culminated in a gathering at the Paris Observatory on October 28 and 29, 2019. In this meeting a group of representatives of different research communities, RDA, CODATA, GO FAIR, US NAS and EOSC discussed the proposed approach, considered it a promising candidate for the core technology of the FAIR ecosystem and committed to continue the refinement and evaluation of the framework towards a "<em>running code</em>" phase where a Proof-of-Concept (PoC) is implemented for testing and demonstration. In this context, this document aims at laying the basic description of the FDOF to guide the discussions around the framework and the implementation of the PoC.</p>
+				<p>The proposal for the FDOF has been first discussed with Barend Mons and George Strawn. After a few refinement iterations, together with Peter Wittenburg, a series of meetings were organized in Europe, in the USA and online involving a number of stakeholders involved in both (F)DO (Peter Wittenburg, Larry Lannom, Robert Quick and others) and Linked Data (Jean-François Abramatic, Eric Prud-hommeaux and others) efforts. These meetings culminated in a gathering at the Paris Observatory on October 28 and 29, 2019. In this meeting a group of representatives of different research communities, RDA, CODATA, GO FAIR, US NAS and EOSC discussed the proposed approach, considered it a promising candidate for the core technology of the FAIR ecosystem and committed to continue the refinement and evaluation of the framework towards a "<em>running code</em>" phase where a Proof-of-Concept (PoC) is implemented for testing and demonstration. These commitments we formalised in a document called "the Paris Declaration" and signed by the participants of the workshop.</p>
+                
+                <p>In this context, this document aims at laying the basic description of the FDOF to guide the discussions around the framework and the implementation of the PoC.</p>
+            
 			
 			<h2 id="fdomodel"><span class="secno">3 </span>The FAIR Digital Object Framework model</h2>
 			
@@ -400,6 +406,53 @@
 						</p>
 			
 						<p>Naturally, this approach of using HTTP media types as the mechanism to resolve to the different elements of the FDOS requires the registration of these media types at the Internet Assigned Numbers Authority (<a href="https://www.iana.org">IANA</a>). The procedures to register new media types are defined in <a href="https://www.iana.org/go/rfc6838">RFC6838</a>, <a href="https://www.iana.org/go/rfc4289">RFC4289</a> and <a href="https://www.iana.org/go/rfc6657">RFC6657</a>.</p>
+            
+                    <h4 id="fdofsignposting"><span class="secno">3.1.3 </span>FDOF-P using HTTP Signposting</h4>
+                    
+                        <p>Closer to the approach using HTTP accept headers defined in the section <a href="#fdofhttpaccept">3.1.2</a> and also relying on the HTTP protocol is the use of <a href="https://signposting.org">Signposting</a>. As described in its webpage, Signposting "<i>uses Typed Links as a means to clarigh patterns that occur repeatedly..."</i>. In short, Signposting uses HTTP Link header for any type of web resource or HTML link elements for HTML resources to facilitate the identification of relevant links by machines. When navigating through web resources, in special web pages, humans have no problem in identifying links other web resources of interest. However, due to the complete freedom on how to convey such links, machines have difficulties in finding their way around.</p>
+            
+                        <p>Examples of information patterns that can be conveyed using Signposting include:</p>
+            
+                        <ul>
+                            <li>Author</li>
+                            <li>Bibliographics metadata</li>
+                            <li>Identifier</li>
+                            <li>Publication boundary</li>
+                            <li>Resource type</li>
+                        </ul>
+            
+                        <p>In the Signposting web page, the authors present an example of authorship information being provided in the HTTP header of the web resource at the URL https://doi.org/10.1045/november2015-vandesompel. In this example, the response to an HTTP HEAD against that URL is:</p>
+            
+                        <p class="data">
+                            <code>HTTP/1.1 302 found<br>
+                            Server: Apache-Coyote/1.1<br>
+                                Vary: Accept<br>
+                                Location: http://www.dlib.org/dlib/november15/vandesompel/11vandesompel.html<br>
+                                <strong>Link:  &lt;http://orcid.org/0000-0002-0715-6126&gt; ; rel="author",</strong><br>
+                                  <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;http://orcid.org/0000-0003-3749-8116&gt; ; rel="author"</strong><br>
+                                Expires: Tue, 31 May 2016 17:18:50 GMT<br>
+                                Content-Type: text/html;charset=utf-8<br>
+                                Content-Length: 217<br>
+                                Date: Tue, 31 May 2016 16:38:15 GMT<br>
+                                Connection: keep-alive<br>
+                            </code>
+                        </p>
+            
+                        <p>Regarding FDOF and Signposting, we could use the approach on the FDO's identifier (URI) providing the links to its metadata record(s) and type information. Similar to HTTP media types, the link types, e.g., <i>author</i> in the previous example, are registered at IANA. These would require that we either reuse existing link types, which may not represent exactly what is intended by the FDOF or registering new link types. The example below present the header of an FDO using the Signposting approach with custom link types.</p>
+            
+                        <p class="example">
+                            <code>HTTP/1.1 200</code><br>
+                            <code>Server: nginx/1.21.6</code><br>
+                            <code>Content-Type: text/turtle</code><br>
+                            <code>Connection: keep-alive</code><br>
+                            <code><strong>Link: &lt;https://fdof.org/object1/fdof-ir&gt; ; rel="fdof-ir",<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;https://fdof.org/object1/metadatarecord1&gt; ; rel="fdof-metadata" ,<br>                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;https://fdof.org/object1/metadatarecord2&gt; ; rel="fdof-metadata" ,<br>                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;https://fdof.org/types/dataset&gt; ; rel="fdof-type"<br>
+                                </strong></code>
+                            <code>Accept: text/html, text/turtle, application/ld+json, application/rdf+xml</code><br>
+                            <code>Expires: 0</code><br>
+                            
+                            
+                        </p>
 			
 				<h3 id="metadataaccess"><span class="secno">3.2 </span>Metadata access mechanism</h3>
 				
@@ -423,12 +476,17 @@
 			
 				<h3 id="typingsystem"><span class="secno">3.3 </span>Object typing system</h3>
 			
-		  When dealing with objects in general, a common question is "What is this object?". Although seemingly simple, this question may have answers reflecting different aspects of the object. For instance, if we are looking at a photograph, some may say that the object in question is a photo while others may refer to what is the content of the photograph, e.g., a mountain. In the digital world, there is yet another aspect under consideration which is the encoding format of the object, e.g., JPG, GIF, PNG, etc. In the FDOF, the typing system reflects these concerns and provide information about:
-<ul>
-	  <li>The encoding format of the digital object, e.g., JSON, XML, RDF, JPG, DOCX, etc.;</li>
-      <li>The type of the digital object with respect to its informational function, e.g., image, video, dataset, service, etc.;</li>
-	  <li>The entity(ies) that are represented by the digital object, e.g., the mountain in a photo, a given protein in a protein dataset.</li>
-	</ul>
+                <p> When dealing with objects in general, a common question is "What is this object?". Although seemingly simple, this question may have answers reflecting different aspects of the object. For instance, if we are looking at a photograph, some may say that the object in question is a photo while others may refer to what is the content of the photograph, e.g., a mountain. In the digital world, another relevant aspect to be taken under consideration is the encoding format of the object, e.g., JPG, GIF, PNG, etc.</p>
+                <p>The question of what can be done with a given object refers to the sorts of operations that can be applied to  the object. This involves the type of the object but also the context around an individual objec, including who is intending to perform the operation. For instance, a given object of an specific type my support a set of operations but someone who would like to manipulate that object may not have permission to perform some of the supported operations. Therefore, a typing system that defines operations to objects should have these definitions to both the type and individual levels. The former informs on which operations are applicable to the type of object and the latter deals with permissions of who is allowed to perform these operations.</p>
+
+                <p>In the FDOF, the typing system reflects these concerns and provide information about: </p>
+                <ul>
+                      <li>The encoding format of the digital object, e.g., JSON, XML, RDF, JPG, DOCX, etc.;</li>
+                      <li>The type of the digital object with respect to its informational function, e.g., image, video, dataset, service, etc.;</li>
+                    <li>The entity(ies) that are represented by the digital object, e.g., the mountain in a photo, a given protein in a protein dataset;</li>
+                      <li>The operations that are applicable to a given type of digital object; and</li>
+                    <li>The operations that are allowed to be performed on a specific digital object.</li>
+                </ul>
             
                     <p>The FAIR principle F2 states that "<em>data are described with rich metadata</em>". This principle, then, defines that metadata have the function of describing digital objects. In practice we have that metadata records contain a set of property attributions that helps describe a given object. Some of these properties may be common to any digital object and some may be specific to certain types of objects.</p>
             
@@ -439,9 +497,9 @@
                         <figcaption><span class="marker">Figure 7</span> FDO types and metadata schemas</figcaption>
                     </figure>
 
-                <p class="note">TODO: COMPLETE THE OBJECT TYPING SYSTEM</p>
+                <p class="note">TODO: COMPLETE THE OBJECT TYPING SYSTEM WITH THE MODEL FOR OPERATIONS</p>
 		<h2 id="fdof-o"><span class="secno">4 </span>FDOF Core Ontology</h2>
-			<p class="note">NOTE: PLACEHOLDER FOR THE LINK TO THE FDOF CORE ONTOLOGY (FDOF-O)</p>
+			<p class="note">NOTE: PLACEHOLDER FOR THE LINK TO THE FDOF CORE ONTOLOGY (FDOF-O) (WORK UNDERWAY)</p>
 			
 			
 	
