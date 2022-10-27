@@ -51,7 +51,7 @@
      <dd><a href="https://github.com/w3c/tr-design/issues/">GitHub</a>
      <dd><a href="#issues-index">Inline In Spec</a-->
 				  <dt>This version:</dt>
-					<dd>19 September 2022</dd>
+					<dd>27 October 2022</dd>
 					<dt>Date of the first draft:</dt>
 					<dd>05 April 2020</dd>
 				  <dt class="editor">Editor/Author:</dt>
@@ -67,13 +67,15 @@
 		<h2 id="abstract">Abstract</h2>
 		<div>
 			<p>The FAIR Digital Object Framework (FDOF)<strong> is a framework which defines a model to represent objects in a digital environment and a mechanism to create, maintain and (re)use these objects&nbsp;</strong>. The framework  consists of <strong>a predictable identifier resolution behaviour, a mechanism to retrieve the object's metadata and an object typing system</strong>. The main goal of the FDOF is to define a set of features to provide foundational support for the FAIR principles.</p>
+			
+			<p class="note">Disclaimer: By design the FAIR principles do not prescribe any specific technology, let the choices open. However, in order to realise the expected behaviours of the FAIR principles, we need to make implementation choices. The FDOF as an implementation framework naturally takes a number of implementation choices. The principle behind FDOF is to limit these implementations choices to a minimum, supporting, beyond these given choices, a high degree of freedom to implementation. The implementation choices defined in FDOF have been selected based on the level of interoperability that the framework intends to guarantee to the participants of the ecosystem. In summary , while there may be many definitions and ways of implementing digital objects following the FAIR principles, in the scope of FDOF, FAIR Digital Objects (with capital letters) have a specific definition and follow a defined representation model.</p>
             
 			<p>In the FDOF, a digital object is a bit sequence located in a digital memory or storage that has, on its own, an informational value, i.e., the bit sequence represents an informational unit such as a document, a dataset, a photo, a service, etc. When this digital object is presented following the FAIR principles we have a FAIR Digital Object. In summary, in the FDOF a <strong>FAIR Digital Object is defined as a sequence of bits that represents an informational unit and is presented according to the FAIR principles.</strong> To be classified as a FAIR Digital Object (FDO), a digital object is identified by a globally-unique, persistent and resolvable identifier with a predictable resolution behaviour, described by related metadata records (FDOs themselves) and classified by the FDOF typing system.</p>
 			<p>This document discusses the motivations for the framework and describes its elements and their interactions.</p>
 	</div>
 		<h2 id="status">Status of this document</h2>
 	<div>
-			<p class="note">This document is a working draft of the FDOF documentation and serves as the basis for the further development and refinement of the framework. This document is currently under development and is, therefore, still incomplete. At this moment it should not be used as a comprehensive explanation and specification of the FDOF.&nbsp;</p>
+			<p class="note">This document is a working draft of the FDOF documentation and serves as the basis for the further development and refinement of the framework. This document is currently under development and is, therefore, still incomplete. At this moment it should not be used as a comprehensive explanation and specification of the FDOF.</p>
 			<p></p>
 		</div>
 
@@ -246,6 +248,8 @@
 				<ul>
 					<li>What is the object that is identified by this identifier?</li>
 					<li>How can I get more information (e.g., how to handle it? who can handle it?, what is it allowed to do with it?) about this object?</li>
+					<li>What can be done with the object?</li>
+					<li>What am I allowed to do with this particular object?</li>
 				</ul>
 				
 				<p>The results of this work are reported in this document.</p>
